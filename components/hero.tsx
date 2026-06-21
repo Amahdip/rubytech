@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Terminal } from "lucide-react";
+import { Terminal } from "lucide-react";
 
-import { AnchorLink } from "@/components/anchor-link";
-import { Button } from "@/components/ui/button";
+import { PremiumButton } from "@/components/ui/premium-button";
+import { springSoft } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const codeLines = [
@@ -18,7 +18,7 @@ function ArchitectureCard() {
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.3 }}
+      transition={{ ...springSoft, delay: 0.3 }}
       className="relative overflow-hidden rounded-2xl themed-card bg-surface/80 p-1 backdrop-blur-xl"
     >
       <div className="absolute inset-0 grid-bg opacity-40" />
@@ -81,7 +81,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={springSoft}
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-ruby/20 bg-ruby/10 px-3 py-1 text-xs font-medium text-ruby">
                 <span className="size-1.5 rounded-full bg-ruby animate-pulse-ruby" />
@@ -93,7 +93,7 @@ export function Hero() {
               id="hero-heading"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ ...springSoft, delay: 0.05 }}
               className="mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
             >
               Engineering systems that{" "}
@@ -103,7 +103,7 @@ export function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ ...springSoft, delay: 0.1 }}
               className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground"
             >
               RubyTech delivers end-to-end technical implementations — from
@@ -114,24 +114,21 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ ...springSoft, delay: 0.15 }}
               className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
-              <Button size="lg" asChild>
-                <AnchorLink href="#contact">
-                  Schedule Technical Discovery
-                  <ArrowRight className="size-4" />
-                </AnchorLink>
-              </Button>
-              <Button variant="secondary" size="lg" asChild>
-                <AnchorLink href="#capabilities">Explore Capabilities</AnchorLink>
-              </Button>
+              <PremiumButton href="#contact" size="lg" showArrow>
+                Schedule Technical Discovery
+              </PremiumButton>
+              <PremiumButton href="#capabilities" variant="secondary" size="lg">
+                Explore Capabilities
+              </PremiumButton>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ ...springSoft, delay: 0.25 }}
               className="mt-10 flex flex-wrap gap-6 text-sm text-muted-foreground"
             >
               <div>

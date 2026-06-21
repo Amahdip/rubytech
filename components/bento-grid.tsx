@@ -10,6 +10,9 @@ import {
   Server,
 } from "lucide-react";
 
+import { DevOpsPipeline } from "@/components/infrastructure-lines";
+import { SpotlightCard } from "@/components/spotlight-card";
+import { springSoft, staggerContainer } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const capabilities = [
@@ -28,6 +31,7 @@ const capabilities = [
       "CI/CD automation, Kubernetes orchestration, and cloud-agnostic infrastructure as code.",
     icon: Cloud,
     className: "md:col-span-1",
+    pipeline: true,
     tags: ["Kubernetes", "Terraform", "GitOps"],
   },
   {
@@ -64,22 +68,6 @@ const capabilities = [
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
-  },
-};
-
 export function BentoGrid() {
   return (
     <section
@@ -93,6 +81,7 @@ export function BentoGrid() {
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={springSoft}
             className="text-sm font-medium uppercase tracking-widest text-ruby"
           >
             Core Capabilities
@@ -102,7 +91,7 @@ export function BentoGrid() {
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={{ ...springSoft, delay: 0.05 }}
             className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
           >
             Full-stack engineering,{" "}
@@ -111,7 +100,7 @@ export function BentoGrid() {
         </div>
 
         <motion.div
-          variants={containerVariants}
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
@@ -120,42 +109,35 @@ export function BentoGrid() {
           {capabilities.map((cap) => {
             const Icon = cap.icon;
             return (
-              <motion.article
+              <SpotlightCard
                 key={cap.title}
-                variants={itemVariants}
-                className={cn(
-                  "group relative overflow-hidden rounded-2xl themed-card bg-surface/60 p-6 backdrop-blur-sm transition-colors hover:border-ruby/30 hover:bg-surface/80",
-                  cap.className,
-                )}
+                featured={cap.featured}
+                className={cn(cap.className)}
               >
-                {cap.featured && (
-                  <div className="pointer-events-none absolute -top-20 -right-20 size-40 rounded-full bg-ruby/10 blur-3xl transition-opacity group-hover:opacity-100 opacity-60" />
-                )}
+                {cap.pipeline && <DevOpsPipeline />}
 
-                <div className="relative">
-                  <div className="flex size-10 items-center justify-center rounded-lg bg-ruby/10 ring-1 ring-ruby/20">
-                    <Icon className="size-5 text-ruby" />
-                  </div>
-
-                  <h3 className="mt-4 text-lg font-semibold tracking-tight">
-                    {cap.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {cap.description}
-                  </p>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {cap.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md border border-border bg-panel-muted px-2 py-0.5 font-mono text-xs text-muted-foreground"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                <div className="flex size-10 items-center justify-center rounded-lg bg-ruby/10 ring-1 ring-ruby/20">
+                  <Icon className="size-5 text-ruby" />
                 </div>
-              </motion.article>
+
+                <h3 className="mt-4 text-lg font-semibold tracking-tight">
+                  {cap.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {cap.description}
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {cap.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-md border border-border bg-panel-muted px-2 py-0.5 font-mono text-xs text-muted-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </SpotlightCard>
             );
           })}
         </motion.div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 import { AnchorLink } from "@/components/anchor-link";
+import { PremiumButton } from "@/components/ui/premium-button";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -91,9 +92,9 @@ export function MainNav() {
           <Button variant="ghost" size="sm" asChild>
             <AnchorLink href="#contact">Contact</AnchorLink>
           </Button>
-          <Button size="sm" asChild>
-            <AnchorLink href="#contact">Schedule Discovery</AnchorLink>
-          </Button>
+          <PremiumButton href="#contact" size="default">
+            Schedule Discovery
+          </PremiumButton>
         </div>
 
         <div className="flex items-center gap-1 md:hidden">
