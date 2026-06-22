@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    networks:
+      - salamruby_default
+    labels:
+      - "traefik.enable=true"
+      # دامنه اصلی خودتون رو اینجا جایگزین کنید
+      - "traefik.http.routers.rubytech.rule=Host(`techruby.ir`)"
+      - "traefik.http.routers.rubytech.entrypoints=websecure"
+      - "traefik.http.routers.rubytech.tls=true"
+      # اگر در پروژه قبلی certresolver اسم دیگه‌ای داره، اینجا تغییر بدید
+      - "traefik.http.routers.rubytech.tls.certresolver=default"
+      - "traefik.http.services.rubytech.loadbalancer.server.port=3000"
+
+networks:
+  # استفاده از شبکه‌ای که Traefik در پروژه salamruby ساخته است
+  salamruby_default:
+    external: true
