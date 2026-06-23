@@ -4,10 +4,12 @@ import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Mail, Send } from "lucide-react";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function ContactCta() {
+  const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
@@ -16,6 +18,8 @@ export function ContactCta() {
     event.preventDefault();
     setSubmitted(true);
   };
+
+  const highlights = t("contact.highlights") as string[];
 
   return (
     <section
@@ -35,26 +39,20 @@ export function ContactCta() {
           <div className="grid lg:grid-cols-2">
             <div className="border-b border-divider p-8 sm:p-10 lg:border-r lg:border-b-0">
               <p className="text-sm font-medium uppercase tracking-widest text-ruby">
-                Get Started
+                {t("contact.badge")}
               </p>
               <h2
                 id="contact-heading"
                 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
               >
-                Schedule your technical discovery
+                {t("contact.title")}
               </h2>
               <p className="mt-4 leading-relaxed text-muted-foreground">
-                Tell us about your infrastructure challenges. Our principal
-                engineers will respond within one business day with a tailored
-                assessment plan.
+                {t("contact.description")}
               </p>
 
               <ul className="mt-8 space-y-3">
-                {[
-                  "Free 60-minute architecture review",
-                  "No-obligation technical roadmap",
-                  "NDA available on request",
-                ].map((item) => (
+                {Array.isArray(highlights) && highlights.map((item) => (
                   <li
                     key={item}
                     className="flex items-center gap-2.5 text-sm text-muted-foreground"
@@ -77,10 +75,10 @@ export function ContactCta() {
                     <CheckCircle2 className="size-7 text-ruby" />
                   </div>
                   <h3 className="mt-4 text-xl font-semibold">
-                    Request received
+                    {t("contact.form.success_title")}
                   </h3>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Our team will reach out to {email} shortly.
+                    {t("contact.form.success_desc", { email })}
                   </p>
                 </motion.div>
               ) : (
@@ -90,19 +88,19 @@ export function ContactCta() {
                       htmlFor="email"
                       className="mb-1.5 block text-sm font-medium"
                     >
-                      Work email
+                      {t("contact.form.email_label")}
                     </label>
                     <div className="relative">
-                      <Mail className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                      <Mail className="pointer-events-none absolute top-1/2 left-3 rtl:left-auto rtl:right-3 size-4 -translate-y-1/2 text-muted-foreground" />
                       <input
                         id="email"
                         type="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="you@company.com"
+                        placeholder={t("contact.form.email_placeholder")}
                         className={cn(
-                          "w-full rounded-lg border border-border bg-input py-2.5 pr-4 pl-10 text-sm",
+                          "w-full rounded-lg border border-border bg-input py-2.5 pr-4 pl-10 rtl:pr-10 rtl:pl-4 text-sm",
                           "placeholder:text-muted-foreground/60",
                           "focus:border-ruby/40 focus:outline-none focus:ring-2 focus:ring-ruby/20",
                         )}
@@ -115,7 +113,7 @@ export function ContactCta() {
                       htmlFor="company"
                       className="mb-1.5 block text-sm font-medium"
                     >
-                      Company
+                      {t("contact.form.company_label")}
                     </label>
                     <input
                       id="company"
@@ -123,7 +121,7 @@ export function ContactCta() {
                       required
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
-                      placeholder="Acme Corp"
+                      placeholder={t("contact.form.company_placeholder")}
                       className={cn(
                         "w-full rounded-lg border border-border bg-input px-4 py-2.5 text-sm",
                         "placeholder:text-muted-foreground/60",
@@ -137,12 +135,12 @@ export function ContactCta() {
                       htmlFor="message"
                       className="mb-1.5 block text-sm font-medium"
                     >
-                      Project overview
+                      {t("contact.form.project_label")}
                     </label>
                     <textarea
                       id="message"
                       rows={4}
-                      placeholder="Describe your technical challenges, timeline, and goals..."
+                      placeholder={t("contact.form.project_placeholder")}
                       className={cn(
                         "w-full resize-none rounded-lg border border-border bg-input px-4 py-2.5 text-sm",
                         "placeholder:text-muted-foreground/60",
@@ -152,7 +150,7 @@ export function ContactCta() {
                   </div>
 
                   <Button type="submit" size="lg" className="w-full">
-                    Submit Discovery Request
+                    {t("contact.form.submit_btn")}
                     <Send className="size-4" />
                   </Button>
                 </form>

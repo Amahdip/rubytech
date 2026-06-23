@@ -76,50 +76,6 @@ export function InfrastructureLines({
   );
 }
 
-export function DevOpsPipeline() {
-  return (
-    <svg
-      viewBox="0 0 240 64"
-      className="pointer-events-none absolute right-4 bottom-4 h-14 w-40 opacity-50"
-      aria-hidden
-      fill="none"
-    >
-      <path
-        d="M8 32 H80 V16 H152 V48 H232"
-        stroke="currentColor"
-        strokeOpacity="0.15"
-        strokeWidth="1"
-      />
-      <motion.path
-        d="M8 32 H80 V16 H152 V48 H232"
-        stroke="#E11D48"
-        strokeWidth="1"
-        strokeLinecap="round"
-        strokeDasharray="3 14"
-        animate={{ strokeDashoffset: [0, -17] }}
-        transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }}
-      />
-      {[8, 80, 152, 232].map((cx, i) => (
-        <motion.circle
-          key={cx}
-          cx={cx}
-          cy={i % 2 === 0 ? 32 : i === 1 ? 16 : 48}
-          r="2.5"
-          fill="#E11D48"
-          initial={{ opacity: 0.3 }}
-          animate={{ opacity: [0.3, 1, 0.3] }}
-          transition={{
-            duration: 1.6,
-            repeat: Infinity,
-            delay: i * 0.25,
-            ease: "linear",
-          }}
-        />
-      ))}
-    </svg>
-  );
-}
-
 export function SectionDivider() {
   return (
     <motion.div

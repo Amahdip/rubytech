@@ -10,48 +10,32 @@ import {
   Shield,
 } from "lucide-react";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 
-const steps = [
-  {
-    id: "audit",
-    title: "Deep Architectural Audit",
-    description:
-      "We map your entire system topology, identify bottlenecks, and produce a prioritized remediation roadmap.",
-    icon: ScanSearch,
-  },
-  {
-    id: "design",
-    title: "System Design & Blueprint",
-    description:
-      "Domain-driven design sessions produce scalable architecture diagrams, API contracts, and infrastructure plans.",
-    icon: BarChart3,
-  },
-  {
-    id: "build",
-    title: "Precision Implementation",
-    description:
-      "Senior engineers build in iterative sprints with continuous integration, code review, and automated testing.",
-    icon: Settings2,
-  },
-  {
-    id: "deploy",
-    title: "Zero-Downtime Launch",
-    description:
-      "Blue-green deployments, feature flags, and canary releases ensure seamless production rollouts.",
-    icon: Rocket,
-  },
-  {
-    id: "scale",
-    title: "Continuous Managed Scaling",
-    description:
-      "24/7 observability, auto-scaling policies, and proactive incident response keep systems performant.",
-    icon: Shield,
-  },
-];
-
 export function ProcessTimeline() {
+  const { t } = useTranslation();
   const [activeStep, setActiveStep] = useState(0);
+
+  const stepsData = t("process.steps");
+
+  if (!Array.isArray(stepsData) || stepsData.length === 0) {
+    return null;
+  }
+
+  const iconsMap: Record<string, any> = {
+    audit: ScanSearch,
+    design: BarChart3,
+    build: Settings2,
+    deploy: Rocket,
+    scale: Shield,
+  };
+
+  const steps = stepsData.map((step) => ({
+    ...step,
+    icon: iconsMap[step.id] || Shield,
+  }));
+
   const active = steps[activeStep];
   const ActiveIcon = active.icon;
 
@@ -75,7 +59,7 @@ export function ProcessTimeline() {
             viewport={{ once: true }}
             className="text-sm font-medium uppercase tracking-widest text-ruby"
           >
-            Our Process
+            {t("process.badge")}
           </motion.p>
           <motion.h2
             id="process-heading"
@@ -85,7 +69,7 @@ export function ProcessTimeline() {
             transition={{ delay: 0.1 }}
             className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
           >
-            From audit to autonomous scaling
+            {t("process.title")}
           </motion.h2>
         </div>
 
@@ -109,7 +93,7 @@ export function ProcessTimeline() {
                   id={`tab-${step.id}`}
                   onClick={() => handleStepClick(i)}
                   className={cn(
-                    "flex shrink-0 items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-200 lg:w-full",
+                    "flex shrink-0 items-center gap-3 rounded-xl border px-4 py-3 text-start transition-all duration-200 lg:w-full",
                     isActive
                       ? "border-ruby/40 bg-ruby/10 text-foreground"
                       : "border-border bg-surface/40 text-muted-foreground hover:border-border hover:text-foreground",
@@ -152,7 +136,7 @@ export function ProcessTimeline() {
               </p>
               <div className="mt-6 flex items-center gap-2 font-mono text-xs text-ruby">
                 <span className="size-1.5 rounded-full bg-ruby animate-pulse-ruby" />
-                Step {activeStep + 1} of {steps.length}
+                {t("process.step_count", { index: activeStep + 1, total: steps.length })}
               </div>
             </div>
           </div>

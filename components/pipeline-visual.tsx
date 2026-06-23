@@ -9,54 +9,61 @@ import {
   Database,
   Globe,
 } from "lucide-react";
-
-const pipelineNodes = [
-  {
-    id: "ingress",
-    label: "API Gateway",
-    icon: Globe,
-    description: "Rate limiting, auth, routing",
-  },
-  {
-    id: "events",
-    label: "Event Bus",
-    icon: ArrowRightLeft,
-    description: "Async messaging, CQRS",
-  },
-  {
-    id: "services",
-    label: "Microservices",
-    icon: Box,
-    description: "Domain-driven boundaries",
-  },
-  {
-    id: "compute",
-    label: "Compute Layer",
-    icon: Cpu,
-    description: "Auto-scaling workloads",
-  },
-  {
-    id: "data",
-    label: "Data Layer",
-    icon: Database,
-    description: "Replicated, sharded stores",
-  },
-  {
-    id: "observe",
-    label: "Observability",
-    icon: Activity,
-    description: "Metrics, traces, alerts",
-  },
-];
-
-const methodology = [
-  "Event-Driven Architecture",
-  "Zero-Downtime Deployments",
-  "Chaos Engineering",
-  "Continuous Delivery",
-];
+import { useTranslation } from "@/hooks/use-translation";
 
 export function PipelineVisual() {
+  const { t } = useTranslation();
+
+  // Dynamically resolve nodes list inside component scope for translations
+  const nodes = [
+    {
+      id: "ingress",
+      label: t("engine.nodes.ingress.label"),
+      icon: Globe,
+      description: t("engine.nodes.ingress.desc"),
+    },
+    {
+      id: "events",
+      label: t("engine.nodes.events.label"),
+      icon: ArrowRightLeft,
+      description: t("engine.nodes.events.desc"),
+    },
+    {
+      id: "services",
+      label: t("engine.nodes.services.label"),
+      icon: Box,
+      description: t("engine.nodes.services.desc"),
+    },
+    {
+      id: "compute",
+      label: t("engine.nodes.compute.label"),
+      icon: Cpu,
+      description: t("engine.nodes.compute.desc"),
+    },
+    {
+      id: "data",
+      label: t("engine.nodes.data.label"),
+      icon: Database,
+      description: t("engine.nodes.data.desc"),
+    },
+    {
+      id: "observe",
+      label: t("engine.nodes.observe.label"),
+      icon: Activity,
+      description: t("engine.nodes.observe.desc"),
+    },
+  ];
+
+  const methodologyList = t("engine.methodology");
+  const methodology = Array.isArray(methodologyList)
+    ? methodologyList
+    : [
+        "Event-Driven Architecture",
+        "Zero-Downtime Deployments",
+        "Chaos Engineering",
+        "Continuous Delivery",
+      ];
+
   return (
     <section
       id="engine"
@@ -74,7 +81,7 @@ export function PipelineVisual() {
               viewport={{ once: true }}
               className="text-sm font-medium uppercase tracking-widest text-ruby"
             >
-              The Engine
+              {t("engine.badge")}
             </motion.p>
             <motion.h2
               id="engine-heading"
@@ -84,18 +91,16 @@ export function PipelineVisual() {
               transition={{ delay: 0.1 }}
               className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
             >
-              Data flows through precision-engineered pipelines
+              {t("engine.title")}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="mt-4 leading-relaxed text-muted-foreground"
+              className="mt-4 leading-relaxed text-muted-foreground text-sm sm:text-base"
             >
-              Our methodology treats every system as a living pipeline — events
-              propagate, services scale elastically, and deployments roll forward
-              without interruption.
+              {t("engine.description")}
             </motion.p>
 
             <ul className="mt-8 space-y-3">
@@ -114,9 +119,9 @@ export function PipelineVisual() {
             <div className="absolute inset-0 grid-bg rounded-2xl opacity-30" />
 
             <div className="relative space-y-3">
-              {pipelineNodes.map((node, i) => {
+              {nodes.map((node, i) => {
                 const Icon = node.icon;
-                const isLast = i === pipelineNodes.length - 1;
+                const isLast = i === nodes.length - 1;
 
                 return (
                   <div key={node.id}>
@@ -125,8 +130,8 @@ export function PipelineVisual() {
                         <Icon className="size-4 text-ruby" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium">{node.label}</p>
-                        <p className="truncate text-xs text-muted-foreground">
+                        <p className="text-sm font-medium text-start">{node.label}</p>
+                        <p className="truncate text-xs text-muted-foreground text-start">
                           {node.description}
                         </p>
                       </div>
@@ -143,7 +148,11 @@ export function PipelineVisual() {
               })}
             </div>
 
-            <div className="relative mt-4 flex items-center justify-between rounded-lg border border-ruby/20 bg-ruby/5 px-4 py-2.5">
+            {/* Encapsulate metrics and status in LTR layout for code variables */}
+            <div 
+              dir="ltr"
+              className="relative mt-4 flex items-center justify-between rounded-lg border border-ruby/20 bg-ruby/5 px-4 py-2.5"
+            >
               <span className="font-mono text-xs text-ruby">
                 pipeline.status → healthy
               </span>

@@ -8,6 +8,7 @@ import { SectionDivider } from "@/components/infrastructure-lines";
 import { MainNav } from "@/components/main-nav";
 import { PipelineVisual } from "@/components/pipeline-visual";
 import { ProcessTimeline } from "@/components/process-timeline";
+import { TalentPipeline } from "@/components/talent-pipeline";
 import { TechMarquee } from "@/components/tech-marquee";
 
 export default function Home() {
@@ -22,6 +23,8 @@ export default function Home() {
         <BentoGrid />
         <SectionDivider />
         <PipelineVisual />
+        <SectionDivider />
+        <TalentPipeline />
         <SectionDivider />
         <CaseStudies />
         <ProcessTimeline />

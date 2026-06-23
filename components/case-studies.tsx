@@ -2,52 +2,21 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, TrendingUp } from "lucide-react";
+import { ChevronLeft, ChevronRight, TrendingUp, ExternalLink } from "lucide-react";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const caseStudies = [
-  {
-    client: "FinTech Platform",
-    metric: "99.99%",
-    label: "Uptime Achieved",
-    description:
-      "Re-architected a legacy monolith into event-driven microservices, eliminating single points of failure across three availability zones.",
-    stats: [
-      { value: "12M+", label: "Daily transactions" },
-      { value: "45ms", label: "Avg response" },
-      { value: "0", label: "Downtime incidents" },
-    ],
-  },
-  {
-    client: "E-Commerce Giant",
-    metric: "Sub-100ms",
-    label: "P99 Latency",
-    description:
-      "Built a globally distributed caching layer and CDN strategy that slashed page load times during peak traffic events.",
-    stats: [
-      { value: "3x", label: "Conversion lift" },
-      { value: "200K", label: "Concurrent users" },
-      { value: "40%", label: "Cost reduction" },
-    ],
-  },
-  {
-    client: "HealthTech SaaS",
-    metric: "SOC 2",
-    label: "Compliance Ready",
-    description:
-      "Implemented zero-trust infrastructure with end-to-end encryption, audit logging, and automated compliance pipelines.",
-    stats: [
-      { value: "100%", label: "Audit pass rate" },
-      { value: "HIPAA", label: "Certified" },
-      { value: "24/7", label: "Monitoring" },
-    ],
-  },
-];
-
 export function CaseStudies() {
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const caseStudies = t("caseStudies.items");
+
+  if (!Array.isArray(caseStudies) || caseStudies.length === 0) {
+    return null;
+  }
 
   const handlePrevious = () => {
     setActiveIndex((prev) =>
@@ -78,7 +47,7 @@ export function CaseStudies() {
               viewport={{ once: true }}
               className="text-sm font-medium uppercase tracking-widest text-ruby"
             >
-              Proof of Delivery
+              {t("caseStudies.badge")}
             </motion.p>
             <motion.h2
               id="case-studies-heading"
@@ -88,7 +57,7 @@ export function CaseStudies() {
               transition={{ delay: 0.1 }}
               className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
             >
-              Results that speak in metrics
+              {t("caseStudies.title")}
             </motion.h2>
           </div>
 
@@ -125,7 +94,24 @@ export function CaseStudies() {
               <div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <TrendingUp className="size-4 text-ruby" />
-                  {active.client}
+                  {active.client.includes("SalamRuby") ? (
+                    <a
+                      href="https://salamruby.ir"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-amber-500 hover:text-amber-400 hover:underline transition-colors flex items-center gap-1 font-semibold"
+                    >
+                      {active.client}
+                      <ExternalLink className="size-3" />
+                    </a>
+                  ) : (
+                    active.client
+                  )}
+                  {!active.client.includes("SalamRuby") && (
+                    <span className="rounded-md bg-ruby/10 border border-ruby/20 px-1.5 py-0.5 text-xs text-ruby font-mono font-medium">
+                      {t("caseStudies.nda_tag")}
+                    </span>
+                  )}
                 </div>
                 <p className="mt-4 text-5xl font-bold tracking-tight text-ruby sm:text-6xl">
                   {active.metric}
@@ -137,7 +123,7 @@ export function CaseStudies() {
               </div>
 
               <div className="grid grid-cols-3 gap-4 self-center">
-                {active.stats.map((stat) => (
+                {active.stats.map((stat: any) => (
                   <div
                     key={stat.label}
                     className="rounded-xl border border-border bg-panel-muted p-4 text-center"

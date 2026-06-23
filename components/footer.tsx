@@ -1,33 +1,10 @@
+"use client";
+
 import Link from "next/link";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { AnchorLink } from "@/components/anchor-link";
 import { Code2, Globe, Share2 } from "lucide-react";
-
-const footerLinks = {
-  services: [
-    { label: "Backend Engineering", href: "#capabilities" },
-    { label: "DevOps & Cloud", href: "#capabilities" },
-    { label: "Frontend Systems", href: "#capabilities" },
-    { label: "Distributed Systems", href: "#capabilities" },
-  ],
-  resources: [
-    { label: "Architecture Guide", href: "#" },
-    { label: "Engineering Blog", href: "#" },
-    { label: "System Design Docs", href: "#" },
-    { label: "Open Source", href: "#" },
-  ],
-  company: [
-    { label: "About", href: "#" },
-    { label: "Case Studies", href: "#case-studies" },
-    { label: "Process", href: "#process" },
-    { label: "Contact", href: "#contact" },
-  ],
-  legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Security", href: "#" },
-  ],
-};
 
 const socialLinks = [
   { label: "GitHub", href: "#", icon: Code2 },
@@ -61,6 +38,34 @@ function FooterLink({
 }
 
 export function Footer() {
+  const { t } = useTranslation();
+
+  const footerLinks = {
+    services: [
+      { label: t("nav.items.backend"), href: "#capabilities" },
+      { label: t("nav.items.devops"), href: "#capabilities" },
+      { label: t("nav.items.frontend"), href: "#capabilities" },
+      { label: t("nav.items.distributed"), href: "#capabilities" },
+    ],
+    resources: [
+      { label: t("footer.resources.guide"), href: "#" },
+      { label: t("footer.resources.blog"), href: "#" },
+      { label: t("footer.resources.docs"), href: "#" },
+      { label: t("footer.resources.oss"), href: "#" },
+    ],
+    company: [
+      { label: t("footer.company.about"), href: "#" },
+      { label: t("footer.company.caseStudies"), href: "#case-studies" },
+      { label: t("footer.company.process"), href: "#process" },
+      { label: t("footer.company.contact"), href: "#contact" },
+    ],
+    legal: [
+      { label: t("footer.legal.privacy"), href: "#" },
+      { label: t("footer.legal.terms"), href: "#" },
+      { label: t("footer.legal.security"), href: "#" },
+    ],
+  };
+
   return (
     <footer className="border-t border-border bg-footer">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
@@ -74,12 +79,11 @@ export function Footer() {
                 <span className="size-3 rounded-full bg-ruby" />
               </span>
               <span className="text-lg font-bold tracking-tight">
-                Ruby<span className="text-ruby">Tech</span>
+                Tech<span className="text-ruby">Ruby</span>
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              Premium software engineering services for teams building
-              mission-critical systems at scale.
+              {t("footer.brand_desc")}
             </p>
             <div className="mt-6 flex gap-3">
               {socialLinks.map(({ label, href, icon: Icon }) => (
@@ -96,7 +100,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold">Services</h3>
+            <h3 className="text-sm font-semibold">{t("footer.sections.services")}</h3>
             <ul className="mt-4 space-y-2.5">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
@@ -107,7 +111,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold">Resources</h3>
+            <h3 className="text-sm font-semibold">{t("footer.sections.resources")}</h3>
             <ul className="mt-4 space-y-2.5">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
@@ -118,7 +122,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold">Company</h3>
+            <h3 className="text-sm font-semibold">{t("footer.sections.company")}</h3>
             <ul className="mt-4 space-y-2.5">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
@@ -129,7 +133,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold">Legal</h3>
+            <h3 className="text-sm font-semibold">{t("footer.sections.legal")}</h3>
             <ul className="mt-4 space-y-2.5">
               {footerLinks.legal.map((link) => (
                 <li key={link.label}>
@@ -142,10 +146,10 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} RubyTech. All rights reserved.
+            {t("footer.copyright", { year: new Date().getFullYear() })}
           </p>
           <p className="font-mono text-xs text-muted-foreground">
-            Built with precision. Deployed with confidence.
+            {t("footer.tagline")}
           </p>
         </div>
       </div>

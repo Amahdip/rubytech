@@ -1,0 +1,501 @@
+{
+  "nav": {
+    "services": "خدمات",
+    "capabilities": "قابلیت‌ها",
+    "architecture": "معماری سیستم",
+    "caseStudies": "نمونه کارها",
+    "process": "فرآیند کار",
+    "contact": "تماس",
+    "schedule": "مشاوره فنی",
+    "items": {
+      "backend": "مهندسی بک‌اند",
+      "devops": "دواپس و ابری",
+      "frontend": "سیستم‌های فرانت‌اند",
+      "microservices": "میکروسرویس‌ها",
+      "distributed": "سیستم‌های توزیع‌شده"
+    }
+  },
+  "hero": {
+    "badge": "خدمات تخصصی مهندسی نرم‌افزار",
+    "title_part1": "معماری سیستم‌هایی که ",
+    "title_gradient": "بدون محدودیت مقیاس می‌شوند",
+    "description": "تک‌روبی پیاده‌سازی‌های فنی همه‌جانبه را تحویل می‌دهد — از بک‌اندهای توزیع‌شده و دواپس ابری تا فرانت‌اندهای پیکسل‌پرفکت. ما سیستم‌های حساس شما را معماری، پیاده‌سازی و مقیاس می‌کنیم.",
+    "cta_primary": "جلسه مشاوره فنی",
+    "cta_secondary": "بررسی قابلیت‌ها",
+    "stats": {
+      "uptime": "۹۹.۹۹٪",
+      "uptime_label": "آپتایم SLA",
+      "latency": "زیر ۱۰۰ میلی‌ثانیه",
+      "latency_label": "P99 تاخیر",
+      "ops": "۲۴/۷",
+      "ops_label": "عملیات مانیتور شده"
+    },
+    "terminal": {
+      "live": "زنده",
+      "aria_label": "خروجی ترمینال استقرار",
+      "nodes": {
+        "gateway": "API Gateway",
+        "eventBus": "Event Bus",
+        "k8s": "K8s Cluster"
+      },
+      "scenarios": [
+        {
+          "filename": "techruby-deploy.log",
+          "steps": [
+            { "action": "command", "text": "$ techruby audit --production" },
+            { "action": "line", "text": "در حال اسکن ۴۷ میکروسرویس...", "variant": "muted", "delay": 500 },
+            { "action": "line", "text": "در حال اعتبارسنجی اسکیمای رویدادها...", "variant": "muted", "delay": 450 },
+            { "action": "line", "text": "ممیزی موفق — همه سیستم‌ها سالم", "variant": "success", "delay": 700 },
+            { "action": "command", "text": "$ deploy pipeline --zero-downtime" },
+            { "action": "progress", "label": "به‌روزرسانی rolling api-gateway", "node": "gateway" },
+            { "action": "line", "text": "تاخیر مصرف‌کننده کافکا: ۰ میلی‌ثانیه", "variant": "muted", "delay": 400 },
+            { "action": "node", "id": "eventBus", "status": "running", "delay": 300 },
+            { "action": "node", "id": "eventBus", "status": "done" },
+            { "action": "line", "text": "استقرار بدون قطعی کامل شد", "variant": "success", "delay": 600 },
+            { "action": "command", "text": "$ kubectl scale deployment/api --replicas=12" },
+            { "action": "node", "id": "k8s", "status": "running" },
+            { "action": "line", "text": "مقیاس‌دهی بار کاری در ۳ ناحیه...", "variant": "muted", "delay": 650 },
+            { "action": "node", "id": "k8s", "status": "done" },
+            { "action": "line", "text": "کلاستر سالم — ۱۲ replica آنلاین", "variant": "success", "delay": 0 }
+          ]
+        },
+        {
+          "filename": "terraform-apply.log",
+          "steps": [
+            { "action": "command", "text": "$ terraform plan -out=prod.tfplan" },
+            { "action": "line", "text": "پردازش ۶ ماژول، ۳۸ منبع...", "variant": "muted", "delay": 550 },
+            { "action": "line", "text": "plan: ۱۴ افزودن، ۰ تغییر، ۰ حذف", "variant": "muted", "delay": 500 },
+            { "action": "command", "text": "$ terraform apply -auto-approve prod.tfplan" },
+            { "action": "progress", "label": "ایجاد VPC و subnetها", "node": "gateway" },
+            { "action": "line", "text": "endpoint کلاستر EKS: آماده", "variant": "muted", "delay": 400 },
+            { "action": "node", "id": "k8s", "status": "running", "delay": 350 },
+            { "action": "node", "id": "k8s", "status": "done" },
+            { "action": "line", "text": "کلاستر Kafka MSK: فعال", "variant": "muted", "delay": 450 },
+            { "action": "node", "id": "eventBus", "status": "running", "delay": 300 },
+            { "action": "node", "id": "eventBus", "status": "done" },
+            { "action": "line", "text": "زیرساخت همگام شد — apply کامل", "variant": "success", "delay": 0 }
+          ]
+        },
+        {
+          "filename": "incident-response.log",
+          "steps": [
+            { "action": "command", "text": "$ kubectl get pods -n production" },
+            { "action": "line", "text": "api-7f2k9: CrashLoopBackOff (۲/۱۲ پاد)", "variant": "muted", "delay": 600 },
+            { "action": "line", "text": "افزایش p99 تاخیر: ۸۴۰ms → هشدار", "variant": "muted", "delay": 500 },
+            { "action": "command", "text": "$ techruby heal --auto --namespace production" },
+            { "action": "node", "id": "gateway", "status": "running" },
+            { "action": "line", "text": "خالی کردن endpointهای ناسالم...", "variant": "muted", "delay": 500 },
+            { "action": "progress", "label": "راه‌اندازی مجدد rolling replicaها", "node": "gateway" },
+            { "action": "line", "text": "فشار event bus: رفع شد", "variant": "muted", "delay": 400 },
+            { "action": "node", "id": "eventBus", "status": "running", "delay": 300 },
+            { "action": "node", "id": "eventBus", "status": "done" },
+            { "action": "node", "id": "k8s", "status": "running", "delay": 350 },
+            { "action": "line", "text": "۱۲/۱۲ پاد آماده — p99: ۶۸ms", "variant": "muted", "delay": 500 },
+            { "action": "node", "id": "k8s", "status": "done" },
+            { "action": "line", "text": "حادثه در ۴۷ ثانیه رفع شد", "variant": "success", "delay": 0 }
+          ]
+        },
+        {
+          "filename": "db-migration.log",
+          "steps": [
+            { "action": "command", "text": "$ techruby migrate --env production --safe" },
+            { "action": "line", "text": "دریافت قفل advisory روی ledger_db...", "variant": "muted", "delay": 500 },
+            { "action": "line", "text": "در انتظار: 003_ledger_indexes.sql", "variant": "muted", "delay": 450 },
+            { "action": "progress", "label": "ایجاد ایندکس‌های concurrent", "node": "eventBus" },
+            { "action": "line", "text": "تاخیر replication: ۰.۳s — در محدوده", "variant": "muted", "delay": 450 },
+            { "action": "command", "text": "$ psql -c 'SELECT verify_ledger_balance();'" },
+            { "action": "line", "text": "محدودیت double-entry: تایید شد", "variant": "muted", "delay": 500 },
+            { "action": "node", "id": "gateway", "status": "running", "delay": 300 },
+            { "action": "line", "text": "connection pool آماده — ۲۰۰ اتصال", "variant": "muted", "delay": 400 },
+            { "action": "node", "id": "gateway", "status": "done" },
+            { "action": "node", "id": "k8s", "status": "running", "delay": 350 },
+            { "action": "node", "id": "k8s", "status": "done" },
+            { "action": "line", "text": "مهاجرت کامل — بدون قطعی", "variant": "success", "delay": 0 }
+          ]
+        },
+        {
+          "filename": "observability.log",
+          "steps": [
+            { "action": "command", "text": "$ helm upgrade otel-collector ./charts --namespace monitoring" },
+            { "action": "line", "text": "دریافت chart نسخه ۲.۴.۱...", "variant": "muted", "delay": 450 },
+            { "action": "progress", "label": "استقرار collector روی ۱۲ نود", "node": "k8s" },
+            { "action": "line", "text": "جمع‌آوری ۸۴۷ endpoint متریک", "variant": "muted", "delay": 500 },
+            { "action": "command", "text": "$ techruby trace --sample-rate 0.1" },
+            { "action": "node", "id": "gateway", "status": "running", "delay": 400 },
+            { "action": "line", "text": "pipeline trace: ۱۲.۴k span/s", "variant": "muted", "delay": 500 },
+            { "action": "node", "id": "gateway", "status": "done" },
+            { "action": "node", "id": "eventBus", "status": "running", "delay": 350 },
+            { "action": "line", "text": "تجمیع لاگ: ۲.۱M رویداد/دقیقه", "variant": "muted", "delay": 450 },
+            { "action": "node", "id": "eventBus", "status": "done" },
+            { "action": "line", "text": "داشبوردها فعال — SLO burn rate: عادی", "variant": "success", "delay": 0 }
+          ]
+        }
+      ]
+    }
+  },
+  "capabilities": {
+    "badge": "قابلیت‌های کلیدی",
+    "title_part1": "مهندسی تمام‌عیار نرم‌افزار، ",
+    "title_muted": "بدون سازش فنی",
+    "items": {
+      "backend": {
+        "title": "بک‌اند پیشرفته",
+        "description": "معماری‌های مقیاس‌پذیر، پرسرعت، همزمانی بالا، میکروسرویس‌ها و سیستم‌های توزیع‌شده طراحی‌شده برای اوج پردازش داده‌ها."
+      },
+      "devops": {
+        "title": "دواپس و Cloud-Native",
+        "description": "اتوماسیون فرآیندهای CI/CD، ارکستریشن با کوبرنتیز و زیرساخت به عنوان کد مستقل از ارائه‌دهنده ابری."
+      },
+      "frontend": {
+        "title": "مهندسی فرانت‌اند",
+        "description": "رابط‌های کاربری فوق‌العاده سریع، پیکسل‌پرفکت و توسعه‌ی اپلیکیشن‌های وب مدرن با استاندارد بالا."
+      },
+      "distributed": {
+        "title": "سیستم‌های توزیع‌شده",
+        "description": "خوشه‌های خطاناپذیر، پروتکل‌های همگرایی و لایه‌های داده‌ی توزیع‌شده سراسری در سطح شبکه."
+      },
+      "data": {
+        "title": "معماری داده",
+        "description": "خط لوله‌های داده‌ی بهینه‌سازی شده، آنالیز بلادرنگ و مدیریت تکامل ساختار پایگاه‌داده در مقیاس بالا."
+      },
+      "talent": {
+        "title": "جذب استعدادها و آکادمی",
+        "description": "به‌کارگیری نخبگان جوان از آکادمی‌های برتر برنامه‌نویسی تحت نظارت معماران ارشد ما جهت مهندسی بسیار بهینه و مقرون‌به‌صرفه."
+      }
+    }
+  },
+  "caseStudies": {
+    "badge": "اثبات توان تحویل",
+    "title": "نتایجی در قالب متریک‌های واقعی",
+    "nda_tag": "محرمانه [Confidential]",
+    "items": [
+      {
+        "client": "آکادمی سلام‌روبی (EdTech)",
+        "metric": "۱۰۰٪ اختصاصی",
+        "label": "کنترل داده و حریم خصوصی",
+        "description": "دیپلوی پلتفرم نظرسنجی بومی‌سازی‌شده‌ی Formbricks و ساخت داشبورد ثبت زمان تدریس معلمان، جهت تضمین کامل مالکیت داده‌ها.",
+        "stats": [
+          { "value": "۵۰+", "label": "معلم فعال" },
+          { "value": "۱۰هزار+", "label": "پاسخ ثبت‌شده" },
+          { "value": "۰ ریال", "label": "هزینه هاست" }
+        ]
+      },
+      {
+        "client": "پلتفرم بزرگ پخش ویدیو (استریمینگ)",
+        "metric": "۱۰۰هزار/روز",
+        "label": "ویدیو ترنسکد شده",
+        "description": "معماری مجدد پایپ‌لاین ترنسکد با FFmpeg، کوبرنتیز HPA جهت مقیاس خودکار و صف‌های پیام RabbitMQ/NSQ.",
+        "stats": [
+          { "value": "۶۰٪", "label": "کاهش زمان پردازش" },
+          { "value": "۱۰۰هزار+", "label": "آپلود روزانه" },
+          { "value": "۴۰٪", "label": "صرفه‌جویی ابری" }
+        ]
+      },
+      {
+        "client": "پلتفرم فین‌تک با تراکنش بالا",
+        "metric": "۹۹.۹۹۹٪",
+        "label": "آپتایم SLA",
+        "description": "تغییر مونو‌لیت‌های قدیمی به میکروسرویس‌های توزیع‌شده با زبان Go و gRPC، کافکا و دیتابیس لوکال رپلیکیت‌شده.",
+        "stats": [
+          { "value": "۵۰M+", "label": "تراکنش روزانه" },
+          { "value": "۱۲ms", "label": "میانگین تاخیر P99" },
+          { "value": "۰", "label": "وقفه در سیستم" }
+        ]
+      },
+      {
+        "client": "پلتفرم فروشگاهی بزرگ منطقه MENA",
+        "metric": "۳۰۰k CCU",
+        "label": "کاربر همزمان در اوج بار",
+        "description": "طراحی لایه‌های توزیع‌شده کشینگ با Redis Cluster و منطق CDN در لبه شبکه برای هندل کردن خرید در کمپین‌های تخفیفی بزرگ.",
+        "stats": [
+          { "value": "۳.۵ برابر", "label": "افزایش نرخ تبدیل" },
+          { "value": "۳۰۰ هزار", "label": "کاربر همزمان" },
+          { "value": "۱۲۰ms", "label": "لود P99 صفحه" }
+        ]
+      },
+      {
+        "client": "سامانه رهگیری ناوگان و دارایی‌های سازمانی",
+        "metric": "زیر ۲ ثانیه",
+        "label": "تاخیر در دریافت تلمتری",
+        "description": "دریافت و تحلیل بلادرنگ اطلاعات تلمتری خودروها با صف پیام‌رسانی NSQ و دیتابیس قدرتمند ClickHouse.",
+        "stats": [
+          { "value": "۵۰ هزار", "label": "دستگاه فعال" },
+          { "value": "۲۰ میلیون", "label": "نقطه ارسالی/روز" },
+          { "value": "۹۹.۹٪", "label": "دقت دریافت" }
+        ]
+      },
+      {
+        "client": "سیستم EHR سلامت سازمانی",
+        "metric": "SOC 2 & HIPAA",
+        "label": "سازگاری کامل با امنیت داده",
+        "description": "پیاده‌سازی زیرساخت ابری Zero-Trust با استفاده از Terraform و HashiCorp Vault به همراه دیتابیس‌های رمزنگاری شده.",
+        "stats": [
+          { "value": "۱۰۰٪", "label": "قبولی در ممیزی" },
+          { "value": "۱ میلیون+", "label": "پرونده ایمن شده" },
+          { "value": "۰", "label": "نشت اطلاعات" }
+        ]
+      },
+      {
+        "client": "سامانه مزایده بلادرنگ AdTech",
+        "metric": "۱۵ms بودجه",
+        "label": "حداکثر زمان پاسخ‌دهی",
+        "description": "برنامه‌نویسی سرویس مزایده سریع با Go بر روی سرورهای Bare-metal و مدیریت ترافیک با Traefik و Consul.",
+        "stats": [
+          { "value": "۱۰ میلیارد+", "label": "پیشنهاد روزانه" },
+          { "value": "۸ms", "label": "میانگین پردازش" },
+          { "value": "۹۹.۹۹٪", "label": "پایداری سیستم" }
+        ]
+      },
+      {
+        "client": "هاب اینترنت اشیاء شهر هوشمند",
+        "metric": "۱۰۰هزار/ثانیه",
+        "label": "اوج دریافت تلمتری",
+        "description": "مهندسی درگاه IoT با MQTT، بروکرهای پیام Kafka و دیتابیس‌های سری زمانی TimescaleDB برای آرشیو داده‌ها.",
+        "stats": [
+          { "value": "۱۰ میلیارد", "label": "رویداد ماهانه" },
+          { "value": "۱۰۰هزار/ث", "label": "اوج سرعت نوشتن" },
+          { "value": "۷۰٪", "label": "فشرده‌سازی ذخیره‌ساز" }
+        ]
+      },
+      {
+        "client": "لینک‌های زنجیره تامین ERP",
+        "metric": "۹۹.۹۵٪",
+        "label": "پایداری صف ارسال",
+        "description": "ساخت سناریوهای مانیتورینگ دارایی‌ها با استفاده از صف‌های NSQ، کانتینرهای داکر و میکروسرویس‌ها برای تفکیک خودکار مرسوله‌ها.",
+        "stats": [
+          { "value": "۵TB", "label": "داده پردازش‌شده/روز" },
+          { "value": "۹۹.۹۵٪", "label": "موفقیت صف" },
+          { "value": "۵۰٪", "label": "صرفه‌جویی در دیسک" }
+        ]
+      },
+      {
+        "client": "نمایه‌ساز توزیع‌شده بلاکچین",
+        "metric": "زیر ۱ ثانیه",
+        "label": "همگام‌سازی بلادرنگ نودها",
+        "description": "توسعه‌ی ایندکسرهای پرسرعت به زبان Rust برای دریافت اطلاعات بلاک‌ها و استفاده از صف‌های NSQ برای ارسال به خوشه‌های Elasticsearch.",
+        "stats": [
+          { "value": "۵۰ میلیون+", "label": "بلاک ایندکس‌شده" },
+          { "value": "زیر ۱ ثانیه", "label": "تاخیر همگام‌سازی" },
+          { "value": "۱۵ms", "label": "پاسخ به کوئری‌ها" }
+        ]
+      },
+      {
+        "client": "سیستم بهینه‌سازی مبتنی بر هوش مصنوعی",
+        "metric": "۸۰٪ صرفه‌جویی",
+        "label": "کاهش حجم پهنای باند",
+        "description": "طراحی سیستم‌های بهینه‌سازی تصاویر بدون سرور با AWS Lambda و کتابخانه Sharp و ذخیره‌سازی ابری S3.",
+        "stats": [
+          { "value": "۵۰ میلیون+", "label": "تصویر بهینه‌شده" },
+          { "value": "۸۰٪", "label": "کاهش سایز عکس‌ها" },
+          { "value": "۱۵۰ms", "label": "سرعت پردازش" }
+        ]
+      },
+      {
+        "client": "سیستم کلاس‌های ویدیویی تعاملی EdTech",
+        "metric": "۵۰k CCU",
+        "label": "کلاس‌های همزمان",
+        "description": "ارکستریشن سرورهای رسانه WebRTC با قابلیت مقیاس‌پذیری خودکار در خوشه‌های کوبرنتیز با اپراتورهای اختصاصی.",
+        "stats": [
+          { "value": "۵۰ هزار", "label": "جلسه زنده فعال" },
+          { "value": "۹۹.۹٪", "label": "پایداری خدمات" },
+          { "value": "زیر ۱۵۰ms", "label": "تاخیر ویدیو" }
+        ]
+      },
+      {
+        "client": "دفتر کل حسابداری فین‌تک سازمانی",
+        "metric": "دوطرفه (Double-Entry)",
+        "label": "ثبت دقیق گزارش‌های حسابرسی",
+        "description": "طراحی شمای پایگاه‌داده بسیار دقیق و ایمن در PostgreSQL با معماری CQRS جهت تضمین صددرصدی تراز حساب‌ها.",
+        "stats": [
+          { "value": "۱۵۰ هزار", "label": "حساب فعال" },
+          { "value": "۱۰۰٪", "label": "دقت ممیزی" },
+          { "value": "۵۰٪", "label": "سرعت گزارش‌گیری" }
+        ]
+      },
+      {
+        "client": "موتور جستجوی سازمانی جهانی",
+        "metric": "زیر ۱۰ms P95",
+        "label": "تاخیر در جستجوی محصولات",
+        "description": "یکپارچه‌سازی Elasticsearch با حافظه پنهان Redis برای بازگرداندن سریع‌ترین نتایج جستجوی کالاها از میان میلیون‌ها آیتم.",
+        "stats": [
+          { "value": "۱۰ میلیون+", "label": "آیتم ایندکس‌شده" },
+          { "value": "۸ms", "label": "زمان جستجو P95" },
+          { "value": "۲۰۰٪", "label": "افزایش راندمان" }
+        ]
+      },
+      {
+        "client": "پلتفرم مهندسی کلود شرکتی",
+        "metric": "سرعت ۲ برابری",
+        "label": "افزایش راندمان توسعه‌دهنده",
+        "description": "ساخت ابزارهای سلف‌سرویس برای دیپلوی مستقیم اپلیکیشن‌ها در بسترهای کوبرنتیز درون ساختار Istio Mesh و مانیتورینگ اختصاصی.",
+        "stats": [
+          { "value": "۱۵۰+", "label": "میکروسرویس فعال" },
+          { "value": "زیر ۵ دقیقه", "label": "آماده‌سازی K8s" },
+          { "value": "۱۰۰٪", "label": "مانیتورینگ متریک‌ها" }
+        ]
+      },
+      {
+        "client": "سرویس احراز هویت توزیع‌شده جغرافیایی",
+        "metric": "زیر ۵۰ms",
+        "label": "زمان پاسخ لبه شبکه",
+        "description": "پیکربندی ساختار مسیریابی Traefik همراه با Cloudflare Workers جهت اعتبارسنجی سریع توکن‌های JWT در نزدیک‌ترین لبه به کاربر.",
+        "stats": [
+          { "value": "۱.۵ میلیارد", "label": "درخواست ماهانه" },
+          { "value": "۳۵ms", "label": "زمان پاسخ لبه" },
+          { "value": "۹۹.۹۹٪", "label": "پایداری کامل" }
+        ]
+      }
+    ]
+  },
+  "process": {
+    "badge": "فرآیند کار ما",
+    "title": "از ممیزی ساختار تا مقیاس‌پذیری پویا",
+    "step_count": "مرحله {index} از {total}",
+    "steps": [
+      {
+        "id": "audit",
+        "title": "حسابرسی فنی معماری",
+        "description": "ما کل توپولوژی سیستم شما را ترسیم کرده، گلوگاه‌ها را پیدا می‌کنیم و یک برنامه‌ی زمان‌بندی بهبود اولویت‌بندی‌شده ارائه می‌دهیم."
+      },
+      {
+        "id": "design",
+        "title": "طراحی سیستم و نقشه راه",
+        "description": "با جلسات تخصصی طراحی، فلوچارت‌های مقیاس‌پذیر، قرارداهای API و نقشه‌های زیرساخت ابری تولید می‌شوند."
+      },
+      {
+        "id": "build",
+        "title": "پیاده‌سازی دقیق",
+        "description": "مهندسان ارشد کدهای تمیز را در اسپرینت‌های منظم، همراه با تست‌های اتوماتیک و بررسی‌های سخت‌گیرانه توسعه می‌دهند."
+      },
+      {
+        "id": "deploy",
+        "title": "راه‌اندازی بدون وقفه",
+        "description": "دیپلوی‌های Blue-green، فلگ‌های فیچر و ریلیزهای Canary راه‌اندازی بدون حتی یک ثانیه قطعی را برای کاربران شما تضمین می‌کنند."
+      },
+      {
+        "id": "scale",
+        "title": "پشتیبانی و اسکیل مداوم",
+        "description": "مانیتورینگ ۲۴/۷ و مانیتور فعال لایه‌های توزیع‌شده، کارایی و مقیاس هوشمند سیستم را همواره حفظ می‌کنند."
+      }
+    ]
+  },
+  "contact": {
+    "badge": "شروع همکاری",
+    "title": "مشاوره فنی خود را هماهنگ کنید",
+    "description": "چالش‌های زیرساختی خود را به ما بگویید. مهندسان اصلی ما ظرف یک روز کاری با یک پروپوزال فنی اولیه با شما تماس می‌گیرند.",
+    "highlights": [
+      "۶۰ دقیقه مشاوره رایگان بررسی معماری سیستم",
+      "نقشه راه فنی بدون اجبار به قرارداد",
+      "امضای قرارداد عدم افشا (Confidentiality / NDA)"
+    ],
+    "form": {
+      "email_label": "ایمیل کاری",
+      "email_placeholder": "you@company.com",
+      "company_label": "نام شرکت",
+      "company_placeholder": "نام کسب‌وکار شما",
+      "project_label": "خلاصه چالش فنی",
+      "project_placeholder": "درباره مشکلات فنی فعلی، ددلاین و اهداف خود بنویسید...",
+      "submit_btn": "ثبت درخواست جلسه مشاوره",
+      "success_title": "درخواست دریافت شد",
+      "success_desc": "تیم ما به زودی با آدرس {email} با شما مکاتبه خواهد کرد."
+    }
+  },
+  "footer": {
+    "brand_desc": "خدمات تخصصی مهندسی نرم‌افزار برای توسعه‌دهندگانی که سیستم‌های حساس را در مقیاس بزرگ مدیریت می‌کنند.",
+    "tagline": "طراحی شده با دقت. دیپلوی شده با اطمینان کامل.",
+    "copyright": "© {year} تک‌روبی. تمامی حقوق محفوظ است.",
+    "sections": {
+      "services": "خدمات",
+      "resources": "منابع",
+      "company": "شرکت",
+      "legal": "قوانین"
+    },
+    "resources": {
+      "guide": "راهنمای معماری",
+      "blog": "وبلاگ فنی",
+      "docs": "اسناد طراحی سیستم",
+      "oss": "پروژه‌های بازمتن"
+    },
+    "company": {
+      "about": "درباره ما",
+      "caseStudies": "نمونه کارها",
+      "process": "فرآیند کار",
+      "contact": "تماس"
+    },
+    "legal": {
+      "privacy": "حریم خصوصی",
+      "terms": "قوانین استفاده",
+      "security": "امنیت"
+    }
+  },
+  "talentPipeline": {
+    "badge": "خط لوله استعدادها",
+    "title": "جریان مداوم متخصصان مهندسی زبده",
+    "description": "ما بین آموزش‌های آکادمیک سطح بالا و استانداردهای تولید سازمانی پل می‌زنیم. با جذب مستقیم از آکادمی‌های ممتازی مثل سلام‌روبی و منتورینگ یک‌به‌یک آن‌ها زیر نظر معماران ارشد، کیفیتی در سطح استانداردهای جهانی و بهینه‌سازی شده از نظر هزینه‌ها ارائه می‌دهیم.",
+    "stages": [
+      {
+        "id": "sourcing",
+        "title": "جذب مستقیم نخبگان (سلام‌روبی)",
+        "badge": "بخش اول: جذب",
+        "metric": "۵٪ برتر",
+        "metricLabel": "فارغ‌التحصیلان پذیرفته شده",
+        "description": "ما باهوش‌ترین ذهن‌ها را از بین دوره‌های سنگین برنامه‌نویسی سیستم آکادمی سلام‌روبی انتخاب کرده و توان فنی پایه‌ای بالای آن‌ها را تضمین می‌کنیم."
+      },
+      {
+        "id": "mentorship",
+        "title": "منتورینگ مستقیم معمار ارشد",
+        "badge": "بخش دوم: پردازش و هدایت",
+        "metric": "نسبت ۱:۱",
+        "metricLabel": "نظارت مستقیم ارشد",
+        "description": "هر مهندس تازه‌وارد مستقیماً به یک معمار ارشد متصل می‌شود. کارها تحت نظارت مستقیم، بررسی‌های سخت‌گیرانه کد و چارچوب‌های معماری انجام می‌شود."
+      },
+      {
+        "id": "delivery",
+        "title": "کیفیت عملیاتی بالا و بهینه",
+        "badge": "بخش سوم: تحویل پروژه",
+        "metric": "۴۰٪+",
+        "metricLabel": "کاهش هزینه‌های تمام‌شده",
+        "description": "مدل ترکیبی مهندس جوان و معمار ارشد، سیستم‌هایی در سطح انترپرایز ولی با هزینه‌های کاملاً بهینه‌سازی شده و به همراه نظارت مداوم تحویل می‌دهد."
+      }
+    ]
+  },
+  "engine": {
+    "badge": "موتور پایپ‌لاین",
+    "title": "جریان داده‌ها در خطوط لوله مهندسی شده با دقت بالا",
+    "description": "متدولوژی ما با هر سیستم مانند یک خط لوله‌ی زنده رفتار می‌کند؛ رویدادها منتشر می‌شوند، سرویس‌ها به صورت پویا مقیاس می‌شوند و دیپلوی‌ها بدون وقفه جلو می‌روند.",
+    "methodology": [
+      "معماری رویدادمحور",
+      "راه‌اندازی بدون قطعی (Zero-Downtime)",
+      "مهندسی آشوب (Chaos Engineering)",
+      "تحویل مداوم (Continuous Delivery)"
+    ],
+    "nodes": {
+      "ingress": {
+        "label": "درگاه API Gateway",
+        "desc": "محدودیت نرخ، احراز هویت، مسیریابی"
+      },
+      "events": {
+        "label": "Event Bus",
+        "desc": "پیام‌رسانی ناهمگام، CQRS"
+      },
+      "services": {
+        "label": "میکروسرویس‌ها",
+        "desc": "مرزهای مبتنی بر دامنه (DDD)"
+      },
+      "compute": {
+        "label": "لایه پردازشی",
+        "desc": "مقیاس خودکار تسک‌ها"
+      },
+      "data": {
+        "label": "لایه ذخیره‌سازی داده",
+        "desc": "دیتابیس رپلیکیت و شارد شده"
+      },
+      "observe": {
+        "label": "مشاهده‌پذیری",
+        "desc": "متریک‌ها، تریس‌ها، هشدارها"
+      }
+    },
+    "status": "pipeline.status → healthy",
+    "throughput": "throughput: 48.2k rps"
+  }
+}

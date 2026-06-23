@@ -14,25 +14,27 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 
-const services = [
-  { label: "Backend Engineering", href: "#capabilities" },
-  { label: "DevOps & Cloud", href: "#capabilities" },
-  { label: "Frontend Systems", href: "#capabilities" },
-  { label: "Microservices", href: "#capabilities" },
-  { label: "Distributed Systems", href: "#capabilities" },
-];
-
-const navLinks = [
-  { label: "Capabilities", href: "#capabilities" },
-  { label: "Architecture", href: "#engine" },
-  { label: "Case Studies", href: "#case-studies" },
-  { label: "Process", href: "#process" },
-];
-
 export function MainNav() {
+  const { t, locale, setLocale } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const services = [
+    { label: t("nav.items.backend"), href: "#capabilities" },
+    { label: t("nav.items.devops"), href: "#capabilities" },
+    { label: t("nav.items.frontend"), href: "#capabilities" },
+    { label: t("nav.items.microservices"), href: "#capabilities" },
+    { label: t("nav.items.distributed"), href: "#capabilities" },
+  ];
+
+  const navLinks = [
+    { label: t("nav.capabilities"), href: "#capabilities" },
+    { label: t("nav.architecture"), href: "#engine" },
+    { label: t("nav.caseStudies"), href: "#case-studies" },
+    { label: t("nav.process"), href: "#process" },
+  ];
 
   const handleMobileNavClick = () => {
     setMobileOpen(false);
@@ -52,7 +54,7 @@ export function MainNav() {
             <span className="size-3 rounded-full bg-ruby ruby-glow" />
           </span>
           <span className="text-lg font-bold tracking-tight">
-            Ruby<span className="text-ruby">Tech</span>
+            Tech<span className="text-ruby">Ruby</span>
           </span>
         </Link>
 
@@ -63,7 +65,7 @@ export function MainNav() {
                 type="button"
                 className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-hover hover:text-foreground"
               >
-                Services
+                {t("nav.services")}
                 <ChevronDown className="size-4" />
               </button>
             </DropdownMenuTrigger>
@@ -88,16 +90,30 @@ export function MainNav() {
         </div>
 
         <div className="hidden items-center gap-2 md:flex">
+          <button
+            onClick={() => setLocale(locale === "en" ? "fa" : "en")}
+            className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-panel-muted text-xs font-bold tracking-wider text-muted-foreground hover:bg-hover hover:text-foreground transition-all duration-200 cursor-pointer"
+            aria-label="Toggle language"
+          >
+            {locale === "en" ? "FA" : "EN"}
+          </button>
           <ThemeToggle />
           <Button variant="ghost" size="sm" asChild>
-            <AnchorLink href="#contact">Contact</AnchorLink>
+            <AnchorLink href="#contact">{t("nav.contact")}</AnchorLink>
           </Button>
           <PremiumButton href="#contact" size="default">
-            Schedule Discovery
+            {t("nav.schedule")}
           </PremiumButton>
         </div>
 
         <div className="flex items-center gap-1 md:hidden">
+          <button
+            onClick={() => setLocale(locale === "en" ? "fa" : "en")}
+            className="inline-flex size-10 items-center justify-center rounded-lg text-xs font-bold tracking-wider text-muted-foreground hover:bg-hover hover:text-foreground transition-all duration-200 cursor-pointer"
+            aria-label="Toggle language"
+          >
+            {locale === "en" ? "FA" : "EN"}
+          </button>
           <ThemeToggle />
           <button
             type="button"
@@ -132,7 +148,7 @@ export function MainNav() {
           ))}
           <Button className="mt-2 w-full" asChild>
             <AnchorLink href="#contact" onClick={handleMobileNavClick}>
-              Schedule Discovery
+              {t("nav.schedule")}
             </AnchorLink>
           </Button>
         </div>

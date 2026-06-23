@@ -90,8 +90,9 @@ html[data-theme="dark"] {
   --color-code-keyword: var(--code-keyword);
   --color-code-line: var(--code-line);
   --color-code-text: var(--code-text);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-geist-sans), var(--font-iran-sans-x), sans-serif;
   --font-mono: var(--font-geist-mono);
+  --font-farsi: var(--font-iran-sans-x);
 }
 
 html {
@@ -106,7 +107,7 @@ section[id] {
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-sans);
   transition:
     background-color 0.25s ease,
     color 0.25s ease;

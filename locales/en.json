@@ -1,0 +1,501 @@
+{
+  "nav": {
+    "services": "Services",
+    "capabilities": "Capabilities",
+    "architecture": "Architecture",
+    "caseStudies": "Case Studies",
+    "process": "Process",
+    "contact": "Contact",
+    "schedule": "Schedule Discovery",
+    "items": {
+      "backend": "Backend Engineering",
+      "devops": "DevOps & Cloud",
+      "frontend": "Frontend Systems",
+      "microservices": "Microservices",
+      "distributed": "Distributed Systems"
+    }
+  },
+  "hero": {
+    "badge": "Premium Engineering Services",
+    "title_part1": "Engineering systems that ",
+    "title_gradient": "scale without limits",
+    "description": "TechRuby delivers end-to-end technical implementations — from distributed backends and cloud-native DevOps to pixel-perfect frontends. We architect, build, and scale mission-critical systems.",
+    "cta_primary": "Schedule Technical Discovery",
+    "cta_secondary": "Explore Capabilities",
+    "stats": {
+      "uptime": "99.99%",
+      "uptime_label": "Uptime SLA",
+      "latency": "<100ms",
+      "latency_label": "P99 Latency",
+      "ops": "24/7",
+      "ops_label": "Managed Ops"
+    },
+    "terminal": {
+      "live": "live",
+      "aria_label": "Deployment terminal output",
+      "nodes": {
+        "gateway": "API Gateway",
+        "eventBus": "Event Bus",
+        "k8s": "K8s Cluster"
+      },
+      "scenarios": [
+        {
+          "filename": "techruby-deploy.log",
+          "steps": [
+            { "action": "command", "text": "$ techruby audit --production" },
+            { "action": "line", "text": "scanning 47 microservices...", "variant": "muted", "delay": 500 },
+            { "action": "line", "text": "validating event schemas...", "variant": "muted", "delay": 450 },
+            { "action": "line", "text": "audit passed — all systems nominal", "variant": "success", "delay": 700 },
+            { "action": "command", "text": "$ deploy pipeline --zero-downtime" },
+            { "action": "progress", "label": "rolling update api-gateway", "node": "gateway" },
+            { "action": "line", "text": "kafka consumer lag: 0ms", "variant": "muted", "delay": 400 },
+            { "action": "node", "id": "eventBus", "status": "running", "delay": 300 },
+            { "action": "node", "id": "eventBus", "status": "done" },
+            { "action": "line", "text": "zero-downtime deploy complete", "variant": "success", "delay": 600 },
+            { "action": "command", "text": "$ kubectl scale deployment/api --replicas=12" },
+            { "action": "node", "id": "k8s", "status": "running" },
+            { "action": "line", "text": "scaling workloads across 3 zones...", "variant": "muted", "delay": 650 },
+            { "action": "node", "id": "k8s", "status": "done" },
+            { "action": "line", "text": "cluster healthy — 12 replicas online", "variant": "success", "delay": 0 }
+          ]
+        },
+        {
+          "filename": "terraform-apply.log",
+          "steps": [
+            { "action": "command", "text": "$ terraform plan -out=prod.tfplan" },
+            { "action": "line", "text": "parsing 6 modules, 38 resources...", "variant": "muted", "delay": 550 },
+            { "action": "line", "text": "plan: 14 to add, 0 to change, 0 to destroy", "variant": "muted", "delay": 500 },
+            { "action": "command", "text": "$ terraform apply -auto-approve prod.tfplan" },
+            { "action": "progress", "label": "provisioning VPC + subnets", "node": "gateway" },
+            { "action": "line", "text": "eks cluster endpoint: ready", "variant": "muted", "delay": 400 },
+            { "action": "node", "id": "k8s", "status": "running", "delay": 350 },
+            { "action": "node", "id": "k8s", "status": "done" },
+            { "action": "line", "text": "msk kafka cluster: active", "variant": "muted", "delay": 450 },
+            { "action": "node", "id": "eventBus", "status": "running", "delay": 300 },
+            { "action": "node", "id": "eventBus", "status": "done" },
+            { "action": "line", "text": "infrastructure synchronized — apply complete", "variant": "success", "delay": 0 }
+          ]
+        },
+        {
+          "filename": "incident-response.log",
+          "steps": [
+            { "action": "command", "text": "$ kubectl get pods -n production" },
+            { "action": "line", "text": "api-7f2k9: CrashLoopBackOff (2/12 pods)", "variant": "muted", "delay": 600 },
+            { "action": "line", "text": "p99 latency spike: 840ms → alerting", "variant": "muted", "delay": 500 },
+            { "action": "command", "text": "$ techruby heal --auto --namespace production" },
+            { "action": "node", "id": "gateway", "status": "running" },
+            { "action": "line", "text": "draining unhealthy endpoints...", "variant": "muted", "delay": 500 },
+            { "action": "progress", "label": "rolling restart api replicas", "node": "gateway" },
+            { "action": "line", "text": "event bus backpressure: cleared", "variant": "muted", "delay": 400 },
+            { "action": "node", "id": "eventBus", "status": "running", "delay": 300 },
+            { "action": "node", "id": "eventBus", "status": "done" },
+            { "action": "node", "id": "k8s", "status": "running", "delay": 350 },
+            { "action": "line", "text": "12/12 pods ready — p99: 68ms", "variant": "muted", "delay": 500 },
+            { "action": "node", "id": "k8s", "status": "done" },
+            { "action": "line", "text": "incident resolved in 47s", "variant": "success", "delay": 0 }
+          ]
+        },
+        {
+          "filename": "db-migration.log",
+          "steps": [
+            { "action": "command", "text": "$ techruby migrate --env production --safe" },
+            { "action": "line", "text": "acquiring advisory lock on ledger_db...", "variant": "muted", "delay": 500 },
+            { "action": "line", "text": "pending: 003_ledger_indexes.sql", "variant": "muted", "delay": 450 },
+            { "action": "progress", "label": "creating concurrent indexes", "node": "eventBus" },
+            { "action": "line", "text": "replication lag: 0.3s — within threshold", "variant": "muted", "delay": 450 },
+            { "action": "command", "text": "$ psql -c 'SELECT verify_ledger_balance();'" },
+            { "action": "line", "text": "double-entry constraint: verified", "variant": "muted", "delay": 500 },
+            { "action": "node", "id": "gateway", "status": "running", "delay": 300 },
+            { "action": "line", "text": "connection pool warmed — 200 conns", "variant": "muted", "delay": 400 },
+            { "action": "node", "id": "gateway", "status": "done" },
+            { "action": "node", "id": "k8s", "status": "running", "delay": 350 },
+            { "action": "node", "id": "k8s", "status": "done" },
+            { "action": "line", "text": "migration complete — zero downtime", "variant": "success", "delay": 0 }
+          ]
+        },
+        {
+          "filename": "observability.log",
+          "steps": [
+            { "action": "command", "text": "$ helm upgrade otel-collector ./charts --namespace monitoring" },
+            { "action": "line", "text": "pulling chart v2.4.1...", "variant": "muted", "delay": 450 },
+            { "action": "progress", "label": "deploying collectors to 12 nodes", "node": "k8s" },
+            { "action": "line", "text": "scraping 847 metric endpoints", "variant": "muted", "delay": 500 },
+            { "action": "command", "text": "$ techruby trace --sample-rate 0.1" },
+            { "action": "node", "id": "gateway", "status": "running", "delay": 400 },
+            { "action": "line", "text": "trace pipeline: 12.4k spans/s ingested", "variant": "muted", "delay": 500 },
+            { "action": "node", "id": "gateway", "status": "done" },
+            { "action": "node", "id": "eventBus", "status": "running", "delay": 350 },
+            { "action": "line", "text": "log aggregation: 2.1M events/min", "variant": "muted", "delay": 450 },
+            { "action": "node", "id": "eventBus", "status": "done" },
+            { "action": "line", "text": "dashboards live — SLO burn rate: normal", "variant": "success", "delay": 0 }
+          ]
+        }
+      ]
+    }
+  },
+  "capabilities": {
+    "badge": "Core Capabilities",
+    "title_part1": "Full-stack engineering, ",
+    "title_muted": "zero compromise",
+    "items": {
+      "backend": {
+        "title": "Backend Excellence",
+        "description": "Scalable, high-concurrency architectures, microservices, and distributed systems engineered for peak throughput."
+      },
+      "devops": {
+        "title": "DevOps & Cloud-Native",
+        "description": "CI/CD automation, Kubernetes orchestration, and cloud-agnostic infrastructure as code."
+      },
+      "frontend": {
+        "title": "Frontend Engineering",
+        "description": "High-performance, pixel-perfect user interfaces and modern web applications."
+      },
+      "distributed": {
+        "title": "Distributed Systems",
+        "description": "Fault-tolerant clusters, consensus protocols, and globally distributed data layers."
+      },
+      "data": {
+        "title": "Data Architecture",
+        "description": "Optimized data pipelines, real-time analytics, and schema evolution at scale."
+      },
+      "talent": {
+        "title": "Talent Ingestion & Academy",
+        "description": "Onboarding top-tier young talent from premium coding schools, mentored by our senior architects to deliver cost-effective engineering."
+      }
+    }
+  },
+  "caseStudies": {
+    "badge": "Proof of Delivery",
+    "title": "Results that speak in metrics",
+    "nda_tag": "NDA Protected",
+    "items": [
+      {
+        "client": "SalamRuby Academy (EdTech)",
+        "metric": "100% Ownership",
+        "label": "Data & Privacy Control",
+        "description": "Deployed localized Formbricks survey platform and created a custom teaching hour logging dashboard, ensuring complete data sovereignty.",
+        "stats": [
+          { "value": "50+", "label": "Active teachers" },
+          { "value": "10k+", "label": "Responses logged" },
+          { "value": "0", "label": "Hosting costs" }
+        ]
+      },
+      {
+        "client": "Large-Scale Media Streaming Platform",
+        "metric": "100k/day",
+        "label": "Transcoded Videos",
+        "description": "Re-engineered a core transcoding pipeline using FFmpeg, Kubernetes horizontal pod autoscaling (HPA), and RabbitMQ/NSQ queues.",
+        "stats": [
+          { "value": "60%", "label": "Time reduction" },
+          { "value": "100k+", "label": "Daily uploads" },
+          { "value": "40%", "label": "Cloud savings" }
+        ]
+      },
+      {
+        "client": "High-Frequency FinTech Platform",
+        "metric": "99.999%",
+        "label": "Uptime SLA",
+        "description": "Re-architected legacy monoliths into distributed Go microservices with gRPC, Kafka, and Postgres, removing all single points of failure.",
+        "stats": [
+          { "value": "50M+", "label": "Daily transactions" },
+          { "value": "12ms", "label": "Avg P99 latency" },
+          { "value": "0", "label": "Downtime incidents" }
+        ]
+      },
+      {
+        "client": "MENA Region E-Commerce Platform",
+        "metric": "300k CCU",
+        "label": "Peak concurrent users",
+        "description": "Designed globally distributed caching tiers using Redis Cluster and localized CDN edge logic to handle massive sudden flash-sale traffic.",
+        "stats": [
+          { "value": "3.5x", "label": "Conversion lift" },
+          { "value": "300k", "label": "Concurrent users" },
+          { "value": "120ms", "label": "P99 page load" }
+        ]
+      },
+      {
+        "client": "Enterprise Fleet & Asset Tracking",
+        "metric": "<2s Latency",
+        "label": "Real-time Telemetry",
+        "description": "Ingested and analyzed telemetry data from thousands of vehicles using an NSQ messaging pipeline and ClickHouse database.",
+        "stats": [
+          { "value": "50k", "label": "Active devices" },
+          { "value": "20M", "label": "Piped points/day" },
+          { "value": "99.9%", "label": "Delivery rate" }
+        ]
+      },
+      {
+        "client": "HealthTech EHR Enterprise",
+        "metric": "SOC 2 & HIPAA",
+        "label": "Compliance Ready",
+        "description": "Implemented zero-trust cloud infrastructure using HashiCorp Terraform and Vault, with end-to-end encrypted databases (pgcrypto).",
+        "stats": [
+          { "value": "100%", "label": "Audit pass rate" },
+          { "value": "1M+", "label": "Records secured" },
+          { "value": "0", "label": "Data breaches" }
+        ]
+      },
+      {
+        "client": "AdTech Real-Time Bidder",
+        "metric": "15ms Budget",
+        "label": "Response Limit",
+        "description": "Programmed low-latency Go bidding services deployed on bare-metal servers using Traefik reverse proxies and Consul routing.",
+        "stats": [
+          { "value": "10B+", "label": "Daily bids" },
+          { "value": "8ms", "label": "Avg processing" },
+          { "value": "99.99%", "label": "System availability" }
+        ]
+      },
+      {
+        "client": "Global Smart City IoT Hub",
+        "metric": "100k/sec",
+        "label": "Peak Telemetry Ingestion",
+        "description": "Engineered an IoT gateway using MQTT, Kafka event brokers, and TimescaleDB time-series storage to archive billions of events.",
+        "stats": [
+          { "value": "10B", "label": "Monthly events" },
+          { "value": "100k/s", "label": "Peak write rate" },
+          { "value": "70%", "label": "Storage compression" }
+        ]
+      },
+      {
+        "client": "Logistics & Supply Chain ERP",
+        "metric": "99.95%",
+        "label": "Queue Reliability",
+        "description": "Constructed internal asset-tracking workflows leveraging NSQ queues, Docker environments, and microservices for automatic package classification.",
+        "stats": [
+          { "value": "5TB", "label": "Data processed/day" },
+          { "value": "99.95%", "label": "Queue success" },
+          { "value": "50%", "label": "Storage saved" }
+        ]
+      },
+      {
+        "client": "Distributed Blockchain Indexer",
+        "metric": "<1s Sync",
+        "label": "Real-time Node Indexing",
+        "description": "Constructed indexers in Rust to process node blocks, using NSQ to pipe structured logs into Elasticsearch cluster engines.",
+        "stats": [
+          { "value": "50M+", "label": "Indexed blocks" },
+          { "value": "<1s", "label": "Sync delay" },
+          { "value": "15ms", "label": "Query response" }
+        ]
+      },
+      {
+        "client": "AI-Powered Optimization SaaS",
+        "metric": "80% Saved",
+        "label": "Bandwidth Compression",
+        "description": "Created serverless image-processing pipelines on AWS Lambda utilizing the Sharp image optimization library, backing into S3.",
+        "stats": [
+          { "value": "50M+", "label": "Optimized images" },
+          { "value": "80%", "label": "Size reduction" },
+          { "value": "150ms", "label": "Processing speed" }
+        ]
+      },
+      {
+        "client": "EdTech Interactive Video SaaS",
+        "metric": "50k CCU",
+        "label": "Concurrent Classrooms",
+        "description": "Orchestrated WebRTC media nodes with automatic autoscaling on Kubernetes clusters via custom operators to manage low-latency streaming.",
+        "stats": [
+          { "value": "50k", "label": "Live sessions" },
+          { "value": "99.9%", "label": "Uptime rating" },
+          { "value": "<150ms", "label": "Video delay" }
+        ]
+      },
+      {
+        "client": "Enterprise FinTech Ledger",
+        "metric": "Double-Entry",
+        "label": "Audit Trail Logging",
+        "description": "Designed a strict double-entry ledger SQL schema in PostgreSQL using CQRS architecture pattern to enforce absolute account balancing.",
+        "stats": [
+          { "value": "150k", "label": "Monitored accounts" },
+          { "value": "100%", "label": "Audit accuracy" },
+          { "value": "50%", "label": "Report velocity" }
+        ]
+      },
+      {
+        "client": "Global Enterprise Search Engine",
+        "metric": "<10ms P95",
+        "label": "Catalog Search Latency",
+        "description": "Integrated Elasticsearch cluster search with Redis query cache to return instant catalog listings across multi-million SKU arrays.",
+        "stats": [
+          { "value": "10M+", "label": "Indexed items" },
+          { "value": "8ms", "label": "P95 search time" },
+          { "value": "200%", "label": "Throughput increase" }
+        ]
+      },
+      {
+        "client": "Corporate Platform Engineering",
+        "metric": "2x Velocity",
+        "label": "Developer Efficiency",
+        "description": "Built developer self-service templates deploying Kubernetes applications inside Istio service mesh, unified with Prometheus/Grafana.",
+        "stats": [
+          { "value": "150+", "label": "Active microservices" },
+          { "value": "<5 min", "label": "K8s provisioning" },
+          { "value": "100%", "label": "Metric coverage" }
+        ]
+      },
+      {
+        "client": "Geo-Distributed Authentication API",
+        "metric": "Sub-50ms",
+        "label": "Edge Response Time",
+        "description": "Configured custom proxy routing rules in Traefik paired with Cloudflare Workers to validate JWT authentication tokens at edge locations.",
+        "stats": [
+          { "value": "1.5B", "label": "Monthly requests" },
+          { "value": "35ms", "label": "Edge response" },
+          { "value": "99.99%", "label": "Service uptime" }
+        ]
+      }
+    ]
+  },
+  "process": {
+    "badge": "Our Process",
+    "title": "From audit to autonomous scaling",
+    "step_count": "Step {index} of {total}",
+    "steps": [
+      {
+        "id": "audit",
+        "title": "Deep Architectural Audit",
+        "description": "We map your entire system topology, identify bottlenecks, and produce a prioritized remediation roadmap."
+      },
+      {
+        "id": "design",
+        "title": "System Design & Blueprint",
+        "description": "Domain-driven design sessions produce scalable architecture diagrams, API contracts, and infrastructure plans."
+      },
+      {
+        "id": "build",
+        "title": "Precision Implementation",
+        "description": "Senior engineers build in iterative sprints with continuous integration, code review, and automated testing."
+      },
+      {
+        "id": "deploy",
+        "title": "Zero-Downtime Launch",
+        "description": "Blue-green deployments, feature flags, and canary releases ensure seamless production rollouts."
+      },
+      {
+        "id": "scale",
+        "title": "Continuous Managed Scaling",
+        "description": "24/7 observability, auto-scaling policies, and proactive incident response keep systems performant."
+      }
+    ]
+  },
+  "contact": {
+    "badge": "Get Started",
+    "title": "Schedule your technical discovery",
+    "description": "Tell us about your infrastructure challenges. Our principal engineers will respond within one business day with a tailored assessment plan.",
+    "highlights": [
+      "Free 60-minute architecture review",
+      "No-obligation technical roadmap",
+      "NDA available on request"
+    ],
+    "form": {
+      "email_label": "Work email",
+      "email_placeholder": "you@company.com",
+      "company_label": "Company",
+      "company_placeholder": "Acme Corp",
+      "project_label": "Project overview",
+      "project_placeholder": "Describe your technical challenges, timeline, and goals...",
+      "submit_btn": "Submit Discovery Request",
+      "success_title": "Request received",
+      "success_desc": "Our team will reach out to {email} shortly."
+    }
+  },
+  "footer": {
+    "brand_desc": "Premium software engineering services for teams building mission-critical systems at scale.",
+    "tagline": "Built with precision. Deployed with confidence.",
+    "copyright": "© {year} TechRuby. All rights reserved.",
+    "sections": {
+      "services": "Services",
+      "resources": "Resources",
+      "company": "Company",
+      "legal": "Legal"
+    },
+    "resources": {
+      "guide": "Architecture Guide",
+      "blog": "Engineering Blog",
+      "docs": "System Design Docs",
+      "oss": "Open Source"
+    },
+    "company": {
+      "about": "About",
+      "caseStudies": "Case Studies",
+      "process": "Process",
+      "contact": "Contact"
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "security": "Security"
+    }
+  },
+  "talentPipeline": {
+    "badge": "Talent Pipeline",
+    "title": "A continuous flow of elite engineering talent",
+    "description": "We bridge top-tier academic training with enterprise production standards. By sourcing from premium academies like SalamRuby and mentoring young prodigies 1-on-1 with senior architects, we deliver world-class engineering that is uniquely cost-effective.",
+    "stages": [
+      {
+        "id": "sourcing",
+        "title": "Elite Sourcing (SalamRuby)",
+        "badge": "Phase 1: Ingestion",
+        "metric": "Top 5%",
+        "metricLabel": "Graduates Accepted",
+        "description": "We identify and recruit the most brilliant minds from SalamRuby Academy's intensive systems-programming curricula, ensuring high base technical capability."
+      },
+      {
+        "id": "mentorship",
+        "title": "Architect Mentorship",
+        "badge": "Phase 2: Processing",
+        "metric": "1:1 Ratio",
+        "metricLabel": "Senior Supervision",
+        "description": "Every incoming junior engineer is paired with a Principal Architect. They work under rigorous pair-programming, lint checks, and strict architectural guidelines."
+      },
+      {
+        "id": "delivery",
+        "title": "Production-Grade Value",
+        "badge": "Phase 3: Delivery",
+        "metric": "40%+",
+        "metricLabel": "Cost Optimization",
+        "description": "The junior-architect hybrid model delivers enterprise-quality features at highly optimized costs. Complete continuous delivery, zero-downtime oversight."
+      }
+    ]
+  },
+  "engine": {
+    "badge": "The Engine",
+    "title": "Data flows through precision-engineered pipelines",
+    "description": "Our methodology treats every system as a living pipeline — events propagate, services scale elastically, and deployments roll forward without interruption.",
+    "methodology": [
+      "Event-Driven Architecture",
+      "Zero-Downtime Deployments",
+      "Chaos Engineering",
+      "Continuous Delivery"
+    ],
+    "nodes": {
+      "ingress": {
+        "label": "API Gateway",
+        "desc": "Rate limiting, auth, routing"
+      },
+      "events": {
+        "label": "Event Bus",
+        "desc": "Async messaging, CQRS"
+      },
+      "services": {
+        "label": "Microservices",
+        "desc": "Domain-driven boundaries"
+      },
+      "compute": {
+        "label": "Compute Layer",
+        "desc": "Auto-scaling workloads"
+      },
+      "data": {
+        "label": "Data Layer",
+        "desc": "Replicated, sharded stores"
+      },
+      "observe": {
+        "label": "Observability",
+        "desc": "Metrics, traces, alerts"
+      }
+    },
+    "status": "pipeline.status → healthy",
+    "throughput": "throughput: 48.2k rps"
+  }
+}

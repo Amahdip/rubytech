@@ -1,72 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Terminal } from "lucide-react";
 
+import { useTranslation } from "@/hooks/use-translation";
+import { HeroTerminal } from "@/components/hero-terminal";
 import { PremiumButton } from "@/components/ui/premium-button";
 import { springSoft } from "@/lib/motion";
-import { cn } from "@/lib/utils";
-
-const codeLines = [
-  { prefix: "const", content: " architecture = await audit();" },
-  { prefix: "await", content: " deploy.zeroDowntime();" },
-  { prefix: "return", content: " scale.infinite();", highlight: true },
-];
-
-function ArchitectureCard() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ ...springSoft, delay: 0.3 }}
-      className="relative overflow-hidden rounded-2xl themed-card bg-surface/80 p-1 backdrop-blur-xl"
-    >
-      <div className="absolute inset-0 grid-bg opacity-40" />
-      <div className="relative rounded-xl bg-panel p-5">
-        <div className="mb-4 flex items-center gap-2 border-b border-divider pb-3">
-          <Terminal className="size-4 text-ruby" />
-          <span className="font-mono text-xs text-muted-foreground">
-            rubytech-architecture.ts
-          </span>
-          <span className="ml-auto flex gap-1.5">
-            <span className="size-2.5 rounded-full bg-red-500/80" />
-            <span className="size-2.5 rounded-full bg-yellow-500/80" />
-            <span className="size-2.5 rounded-full bg-green-500/80" />
-          </span>
-        </div>
-
-        <div className="space-y-2 font-mono text-sm">
-          {codeLines.map((line, i) => (
-            <div key={i} className="flex gap-2">
-              <span className="select-none text-code-line">{i + 1}</span>
-              <span className="text-code-keyword">{line.prefix}</span>
-              <span
-                className={cn(
-                  line.highlight ? "text-ruby" : "text-code-text",
-                )}
-              >
-                {line.content}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-5 grid grid-cols-3 gap-2">
-          {["API Gateway", "Event Bus", "K8s Cluster"].map((node) => (
-            <div
-              key={node}
-              className="rounded-lg border border-border bg-panel-muted px-2 py-2 text-center text-xs text-muted-foreground"
-            >
-              {node}
-            </div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
 export function Hero() {
+  const { t } = useTranslation();
+
   return (
     <section
       aria-labelledby="hero-heading"
@@ -85,7 +28,7 @@ export function Hero() {
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-ruby/20 bg-ruby/10 px-3 py-1 text-xs font-medium text-ruby">
                 <span className="size-1.5 rounded-full bg-ruby animate-pulse-ruby" />
-                Premium Engineering Services
+                {t("hero.badge")}
               </span>
             </motion.div>
 
@@ -96,8 +39,8 @@ export function Hero() {
               transition={{ ...springSoft, delay: 0.05 }}
               className="mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
             >
-              Engineering systems that{" "}
-              <span className="text-gradient-ruby">scale without limits</span>
+              {t("hero.title_part1")}
+              <span className="text-gradient-ruby">{t("hero.title_gradient")}</span>
             </motion.h1>
 
             <motion.p
@@ -106,9 +49,7 @@ export function Hero() {
               transition={{ ...springSoft, delay: 0.1 }}
               className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground"
             >
-              RubyTech delivers end-to-end technical implementations — from
-              distributed backends and cloud-native DevOps to pixel-perfect
-              frontends. We architect, build, and scale mission-critical systems.
+              {t("hero.description")}
             </motion.p>
 
             <motion.div
@@ -118,10 +59,10 @@ export function Hero() {
               className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
               <PremiumButton href="#contact" size="lg" showArrow>
-                Schedule Technical Discovery
+                {t("hero.cta_primary")}
               </PremiumButton>
               <PremiumButton href="#capabilities" variant="secondary" size="lg">
-                Explore Capabilities
+                {t("hero.cta_secondary")}
               </PremiumButton>
             </motion.div>
 
@@ -133,26 +74,26 @@ export function Hero() {
             >
               <div>
                 <span className="block text-2xl font-bold tracking-tight text-foreground">
-                  99.99%
+                  {t("hero.stats.uptime")}
                 </span>
-                Uptime SLA
+                {t("hero.stats.uptime_label")}
               </div>
               <div>
                 <span className="block text-2xl font-bold tracking-tight text-foreground">
-                  &lt;100ms
+                  {t("hero.stats.latency")}
                 </span>
-                P99 Latency
+                {t("hero.stats.latency_label")}
               </div>
               <div>
                 <span className="block text-2xl font-bold tracking-tight text-foreground">
-                  24/7
+                  {t("hero.stats.ops")}
                 </span>
-                Managed Ops
+                {t("hero.stats.ops_label")}
               </div>
             </motion.div>
           </div>
 
-          <ArchitectureCard />
+          <HeroTerminal />
         </div>
       </div>
     </section>

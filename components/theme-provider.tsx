@@ -8,7 +8,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       attribute="class"
       defaultTheme="dark"
       enableSystem={false}
-      storageKey="rubytech-theme"
+      storageKey="techruby-theme"
       themes={["light", "dark"]}
       disableTransitionOnChange={false}
     >

@@ -8,67 +8,63 @@ import {
   GitBranch,
   Layers,
   Server,
+  ExternalLink,
 } from "lucide-react";
 
-import { DevOpsPipeline } from "@/components/infrastructure-lines";
+import { useTranslation } from "@/hooks/use-translation";
 import { SpotlightCard } from "@/components/spotlight-card";
 import { springSoft, staggerContainer } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-const capabilities = [
-  {
-    title: "Backend Excellence",
-    description:
-      "Scalable, high-concurrency architectures, microservices, and distributed systems engineered for peak throughput.",
-    icon: Server,
-    className: "md:col-span-2 md:row-span-2",
-    featured: true,
-    tags: ["Microservices", "Event Sourcing", "CQRS"],
-  },
-  {
-    title: "DevOps & Cloud-Native",
-    description:
-      "CI/CD automation, Kubernetes orchestration, and cloud-agnostic infrastructure as code.",
-    icon: Cloud,
-    className: "md:col-span-1",
-    pipeline: true,
-    tags: ["Kubernetes", "Terraform", "GitOps"],
-  },
-  {
-    title: "Frontend Engineering",
-    description:
-      "High-performance, pixel-perfect user interfaces and modern web applications.",
-    icon: Code2,
-    className: "md:col-span-1",
-    tags: ["React", "Next.js", "Design Systems"],
-  },
-  {
-    title: "Distributed Systems",
-    description:
-      "Fault-tolerant clusters, consensus protocols, and globally distributed data layers.",
-    icon: GitBranch,
-    className: "md:col-span-1",
-    tags: ["Kafka", "Redis", "gRPC"],
-  },
-  {
-    title: "Data Architecture",
-    description:
-      "Optimized data pipelines, real-time analytics, and schema evolution at scale.",
-    icon: Database,
-    className: "md:col-span-1",
-    tags: ["PostgreSQL", "ClickHouse", "ETL"],
-  },
-  {
-    title: "Platform Engineering",
-    description:
-      "Internal developer platforms, service meshes, and observability stacks.",
-    icon: Layers,
-    className: "md:col-span-2",
-    tags: ["Istio", "Prometheus", "OpenTelemetry"],
-  },
-];
-
 export function BentoGrid() {
+  const { t } = useTranslation();
+
+  const capabilities = [
+    {
+      title: t("capabilities.items.backend.title"),
+      description: t("capabilities.items.backend.description"),
+      icon: Server,
+      className: "md:col-span-2 md:row-span-2",
+      featured: true,
+      tags: ["Microservices", "Event Sourcing", "CQRS"],
+    },
+    {
+      title: t("capabilities.items.devops.title"),
+      description: t("capabilities.items.devops.description"),
+      icon: Cloud,
+      className: "md:col-span-1",
+      tags: ["Kubernetes", "Terraform", "GitOps"],
+    },
+    {
+      title: t("capabilities.items.frontend.title"),
+      description: t("capabilities.items.frontend.description"),
+      icon: Code2,
+      className: "md:col-span-1",
+      tags: ["React", "Next.js", "Design Systems"],
+    },
+    {
+      title: t("capabilities.items.distributed.title"),
+      description: t("capabilities.items.distributed.description"),
+      icon: GitBranch,
+      className: "md:col-span-1",
+      tags: ["Kafka", "Redis", "gRPC"],
+    },
+    {
+      title: t("capabilities.items.data.title"),
+      description: t("capabilities.items.data.description"),
+      icon: Database,
+      className: "md:col-span-1",
+      tags: ["PostgreSQL", "ClickHouse", "ETL"],
+    },
+    {
+      title: t("capabilities.items.talent.title"),
+      description: t("capabilities.items.talent.description"),
+      icon: Layers,
+      className: "md:col-span-2",
+      tags: ["SalamRuby", "Mentorship", "Junior Devs"],
+    },
+  ];
+
   return (
     <section
       id="capabilities"
@@ -84,7 +80,7 @@ export function BentoGrid() {
             transition={springSoft}
             className="text-sm font-medium uppercase tracking-widest text-ruby"
           >
-            Core Capabilities
+            {t("capabilities.badge")}
           </motion.p>
           <motion.h2
             id="capabilities-heading"
@@ -94,8 +90,8 @@ export function BentoGrid() {
             transition={{ ...springSoft, delay: 0.05 }}
             className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
           >
-            Full-stack engineering,{" "}
-            <span className="text-muted-foreground">zero compromise</span>
+            {t("capabilities.title_part1")}
+            <span className="text-muted-foreground">{t("capabilities.title_muted")}</span>
           </motion.h2>
         </div>
 
@@ -114,8 +110,6 @@ export function BentoGrid() {
                 featured={cap.featured}
                 className={cn(cap.className)}
               >
-                {cap.pipeline && <DevOpsPipeline />}
-
                 <div className="flex size-10 items-center justify-center rounded-lg bg-ruby/10 ring-1 ring-ruby/20">
                   <Icon className="size-5 text-ruby" />
                 </div>
@@ -128,14 +122,30 @@ export function BentoGrid() {
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {cap.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md border border-border bg-panel-muted px-2 py-0.5 font-mono text-xs text-muted-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  {cap.tags.map((tag) => {
+                    if (tag === "SalamRuby") {
+                      return (
+                        <a
+                          key={tag}
+                          href="https://salamruby.ir"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="rounded-md border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 font-mono text-xs text-amber-500 hover:bg-amber-500/20 hover:border-amber-500/50 hover:shadow-[0_0_12px_rgba(245,158,11,0.25)] transition-all duration-300 flex items-center gap-1"
+                        >
+                          {tag}
+                          <ExternalLink className="size-3" />
+                        </a>
+                      );
+                    }
+                    return (
+                      <span
+                        key={tag}
+                        className="rounded-md border border-border bg-panel-muted px-2 py-0.5 font-mono text-xs text-muted-foreground"
+                      >
+                        {tag}
+                      </span>
+                    );
+                  })}
                 </div>
               </SpotlightCard>
             );
