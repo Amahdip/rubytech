@@ -1,0 +1,47 @@
+/* ============================================================
+   Aparat Spacing & Layout Tokens
+   Derived from component measurements in the Figma files
+   ============================================================ */
+
+:root {
+  /* ── Base spacing scale (4px grid) ────────────── */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  28px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ── Border radius ──────────────────────────────── */
+  --radius-sm:    4px;
+  --radius-md:    8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-pill: 100px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ─────────────────────────────────────── */
+  --shadow-sm:  0 1px 3px rgba(41, 42, 51, 0.08);
+  --shadow-md:  0 2px 8px rgba(41, 42, 51, 0.10);
+  --shadow-lg:  0 4px 16px rgba(41, 42, 51, 0.12);
+  --shadow-card: 0 1px 4px rgba(41, 42, 51, 0.08), 0 0 0 1px rgba(211, 214, 224, 0.5);
+
+  /* ── Layout ─────────────────────────────────────── */
+  --sidebar-width:     260px;
+  --topbar-height:      64px;
+  --content-max-width: 1200px;
+  --card-gap:           16px;
+
+  /* ── Z-index layers ─────────────────────────────── */
+  --z-base:     0;     /* @kind other */
+  --z-raised:   10;    /* @kind other */
+  --z-dropdown: 100;   /* @kind other */
+  --z-overlay:  200;   /* @kind other */
+  --z-modal:    300;   /* @kind other */
+  --z-toast:    400;   /* @kind other */
+}

@@ -67,7 +67,7 @@ export function ProcessTimeline() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
+            className="mt-3 type-section-title text-3xl sm:text-4xl"
           >
             {t("process.title")}
           </motion.h2>
@@ -128,7 +128,7 @@ export function ProcessTimeline() {
               <div className="flex size-12 items-center justify-center rounded-xl bg-ruby/10 ring-1 ring-ruby/20">
                 <ActiveIcon className="size-6 text-ruby" />
               </div>
-              <h3 className="mt-5 text-2xl font-bold tracking-tight">
+              <h3 className="mt-5 text-2xl font-semibold">
                 {active.title}
               </h3>
               <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">

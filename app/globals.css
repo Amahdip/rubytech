@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&family=Sanchez&display=swap');
+
+/* Design System CSS Tokens & Theme Variables */
+@import "../design-system/tokens/colors.css";
+@import "../design-system/tokens/typography.css";
+@import "../design-system/tokens/spacing.css";
+@import "../design-system/tokens/fig-tokens.css";
+@import "../design-system/tokens/fig-typography.css";
+@import "../design-system/components/figma/fig-tokens.css";
+@import "../design-system/components/figma/fig-typography.css";
+@import "../design-system/theme.css";
+
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
@@ -93,6 +105,7 @@ html[data-theme="dark"] {
   --font-sans: var(--font-geist-sans), var(--font-iran-sans-x), sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-farsi: var(--font-iran-sans-x);
+  --font-heading: var(--font-iran-sans-x), var(--font-geist-sans), sans-serif;
 }
 
 html {
@@ -111,6 +124,49 @@ body {
   transition:
     background-color 0.25s ease,
     color 0.25s ease;
+}
+
+html[dir="rtl"] body {
+  font-family: var(--font-farsi), var(--font-geist-sans), sans-serif;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading);
+  letter-spacing: 0;
+}
+
+@utility type-hero {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] .type-hero {
+  line-height: 1.1;
+}
+
+@utility type-section-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] .type-section-title {
+  line-height: 1.55;
+}
+
+@utility type-stat {
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] .text-gradient-ruby {
+  background: none;
+  -webkit-text-fill-color: var(--ruby);
+  color: var(--ruby);
 }
 
 @utility glass {

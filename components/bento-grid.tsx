@@ -88,10 +88,12 @@ export function BentoGrid() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ ...springSoft, delay: 0.05 }}
-            className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
+            className="mt-3 type-section-title text-3xl sm:text-4xl"
           >
-            {t("capabilities.title_part1")}
-            <span className="text-muted-foreground">{t("capabilities.title_muted")}</span>
+            <span className="block">{t("capabilities.title_part1").trim()}</span>
+            <span className="block text-muted-foreground">
+              {t("capabilities.title_muted")}
+            </span>
           </motion.h2>
         </div>
 
@@ -114,7 +116,7 @@ export function BentoGrid() {
                   <Icon className="size-5 text-ruby" />
                 </div>
 
-                <h3 className="mt-4 text-lg font-semibold tracking-tight">
+                <h3 className="mt-4 text-lg font-semibold">
                   {cap.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">

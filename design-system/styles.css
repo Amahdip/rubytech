@@ -1,0 +1,69 @@
+/* ============================================================
+   Aparat Design System — Global Entry Point
+   Import this file to get all tokens, fonts, and base styles.
+   ============================================================ */
+
+@import './tokens/colors.css';
+@import './tokens/typography.css';
+@import './tokens/spacing.css';
+@import './tokens/fig-tokens.css';
+@import './tokens/fig-typography.css';
+@import './components/figma/fig-tokens.css';
+@import './components/figma/fig-typography.css';
+/* Theme overrides — import last so they win */
+@import './theme.css';
+
+/* ── Base reset & global defaults ─────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-persian);
+  font-size: var(--text-paragraph-size);
+  line-height: var(--text-paragraph-line);
+  color: var(--text-body);
+  background-color: var(--surface-home);
+  direction: rtl;
+  text-align: right;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Latin content override */
+[lang="en"], .ltr {
+  direction: ltr;
+  font-family: var(--font-latin);
+}
+
+a {
+  color: var(--color-brand);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-brand-dark);
+}
+
+img, video {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}

@@ -13,7 +13,7 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28"
+      className="relative overflow-hidden pt-20 pb-16 sm:pt-28 sm:pb-24"
     >
       <div className="pointer-events-none absolute inset-0 grid-bg" />
       <div className="pointer-events-none absolute top-1/4 left-1/2 size-[600px] -translate-x-1/2 rounded-full bg-ruby/8 blur-[120px]" />
@@ -37,10 +37,12 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...springSoft, delay: 0.05 }}
-              className="mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+              className="type-hero mt-6 text-3xl text-foreground sm:text-4xl lg:text-5xl"
             >
-              {t("hero.title_part1")}
-              <span className="text-gradient-ruby">{t("hero.title_gradient")}</span>
+              <span className="block">{t("hero.title_part1").trim()}</span>
+              <span className="text-gradient-ruby block">
+                {t("hero.title_gradient")}
+              </span>
             </motion.h1>
 
             <motion.p
@@ -73,19 +75,19 @@ export function Hero() {
               className="mt-10 flex flex-wrap gap-6 text-sm text-muted-foreground"
             >
               <div>
-                <span className="block text-2xl font-bold tracking-tight text-foreground">
+                <span className="type-stat block text-2xl text-foreground">
                   {t("hero.stats.uptime")}
                 </span>
                 {t("hero.stats.uptime_label")}
               </div>
               <div>
-                <span className="block text-2xl font-bold tracking-tight text-foreground">
+                <span className="type-stat block text-2xl text-foreground">
                   {t("hero.stats.latency")}
                 </span>
                 {t("hero.stats.latency_label")}
               </div>
               <div>
-                <span className="block text-2xl font-bold tracking-tight text-foreground">
+                <span className="type-stat block text-2xl text-foreground">
                   {t("hero.stats.ops")}
                 </span>
                 {t("hero.stats.ops_label")}

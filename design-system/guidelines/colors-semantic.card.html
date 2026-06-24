@@ -1,0 +1,50 @@
+<!-- @dsCard group="Colors" viewport="700x220" name="Semantic Colors" subtitle="Danger, success, warning, info — fills and backgrounds" -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    body { background: #fff; padding: 20px; margin: 0; font-family: system-ui, sans-serif; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .group { display: flex; flex-direction: column; gap: 6px; }
+    .swatch-box { height: 44px; border-radius: 6px; }
+    .swatch-bg  { height: 44px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.06); }
+    .swatch-name { font-size: 11px; font-weight: 600; color: #292A33; }
+    .swatch-hex  { font-size: 10px; color: #6F7285; font-family: monospace; }
+    .label { font-size: 9px; color: #9DA1B1; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+  </style>
+</head>
+<body>
+<div class="grid">
+  <div class="group">
+    <div class="label">Danger</div>
+    <div class="swatch-box" style="background:#FF4242;"></div>
+    <div class="swatch-hex">#FF4242</div>
+    <div class="swatch-bg" style="background:#FEF4F7;"></div>
+    <div class="swatch-hex">#FEF4F7</div>
+  </div>
+  <div class="group">
+    <div class="label">Success</div>
+    <div class="swatch-box" style="background:#00B96C;"></div>
+    <div class="swatch-hex">#00B96C</div>
+    <div class="swatch-bg" style="background:#F5FDF9;"></div>
+    <div class="swatch-hex">#F5FDF9</div>
+  </div>
+  <div class="group">
+    <div class="label">Warning</div>
+    <div class="swatch-box" style="background:#EACE3B;"></div>
+    <div class="swatch-hex">#EACE3B</div>
+    <div class="swatch-bg" style="background:#FDF9E8;"></div>
+    <div class="swatch-hex">#FDF9E8</div>
+  </div>
+  <div class="group">
+    <div class="label">Info</div>
+    <div class="swatch-box" style="background:#05A3E8;"></div>
+    <div class="swatch-hex">#05A3E8</div>
+    <div class="swatch-bg" style="background:#E9F8FF;"></div>
+    <div class="swatch-hex">#E9F8FF</div>
+  </div>
+</div>
+</body>
+</html>

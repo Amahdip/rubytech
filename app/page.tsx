@@ -15,22 +15,24 @@ export default function Home() {
   return (
     <>
       <HashScrollHandler />
-      <MainNav />
-      <main>
-        <Hero />
-        <TechMarquee />
-        <SectionDivider />
-        <BentoGrid />
-        <SectionDivider />
-        <PipelineVisual />
-        <SectionDivider />
-        <TalentPipeline />
-        <SectionDivider />
-        <CaseStudies />
-        <ProcessTimeline />
-        <ContactCta />
-      </main>
-      <Footer />
+      <div className="relative flex min-h-screen flex-col overflow-x-clip">
+        <MainNav />
+        <main className="flex-1">
+          <Hero />
+          <TechMarquee />
+          <SectionDivider />
+          <BentoGrid />
+          <SectionDivider />
+          <PipelineVisual />
+          <SectionDivider />
+          <TalentPipeline />
+          <SectionDivider />
+          <CaseStudies />
+          <ProcessTimeline />
+          <ContactCta />
+        </main>
+        <Footer />
+      </div>
     </>
   );
 }

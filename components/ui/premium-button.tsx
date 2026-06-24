@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { AnchorLink } from "@/components/anchor-link";
+import { useTranslation } from "@/hooks/use-translation";
 import { springSnappy } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -14,11 +15,6 @@ const buttonVariants = {
   rest: { scale: 1 },
   hover: { scale: 1.01 },
   tap: { scale: 0.99 },
-};
-
-const arrowVariants = {
-  rest: { x: 0 },
-  hover: { x: 3 },
 };
 
 type PremiumButtonProps = {
@@ -42,6 +38,14 @@ export function PremiumButton({
   type = "button",
   onClick,
 }: PremiumButtonProps) {
+  const { locale } = useTranslation();
+  const isRtl = locale === "fa";
+  const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
+  const arrowVariants = {
+    rest: { x: 0 },
+    hover: { x: isRtl ? -3 : 3 },
+  };
+
   const baseClass = cn(
     "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg font-medium whitespace-nowrap",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ruby/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -62,7 +66,7 @@ export function PremiumButton({
           transition={springSnappy}
           className="relative z-10 inline-flex"
         >
-          <ArrowRight className="size-4" />
+          <ArrowIcon className="size-4" />
         </motion.span>
       )}
       <span

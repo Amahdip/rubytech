@@ -75,7 +75,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full bg-background font-sans text-foreground">
+      <body className="min-h-full overflow-x-clip bg-background font-sans text-foreground">
         <TranslationProvider>
           <ThemeProvider>{children}</ThemeProvider>
         </TranslationProvider>

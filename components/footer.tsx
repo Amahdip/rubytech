@@ -69,8 +69,8 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-footer">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-6">
-          <div className="lg:col-span-2">
+        <div className="grid gap-10 grid-cols-2 lg:grid-cols-6">
+          <div className="col-span-2 lg:col-span-2">
             <Link href="/" className="flex items-center gap-2.5">
               <span
                 aria-hidden
@@ -78,7 +78,7 @@ export function Footer() {
               >
                 <span className="size-3 rounded-full bg-ruby" />
               </span>
-              <span className="text-lg font-bold tracking-tight">
+              <span className="text-lg font-semibold">
                 Tech<span className="text-ruby">Ruby</span>
               </span>
             </Link>
@@ -144,11 +144,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
-          <p className="text-xs text-muted-foreground">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-center sm:flex-row sm:text-start">
+          <p className="text-sm leading-relaxed text-muted-foreground sm:text-xs">
             {t("footer.copyright", { year: new Date().getFullYear() })}
           </p>
-          <p className="font-mono text-xs text-muted-foreground">
+          <p className="text-sm leading-relaxed text-muted-foreground sm:text-xs">
             {t("footer.tagline")}
           </p>
         </div>

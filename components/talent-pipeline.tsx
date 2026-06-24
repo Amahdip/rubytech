@@ -6,9 +6,9 @@ import {
   GraduationCap, 
   Users, 
   GitMerge, 
+  ArrowLeft,
   ArrowRight,
   Sparkles,
-  Lock,
   Cpu,
   Terminal,
   Activity
@@ -53,8 +53,10 @@ const defaultStages: Stage[] = [
 ];
 
 export function TalentPipeline() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [activeIdx, setActiveIdx] = useState(0);
+  const isRtl = locale === "fa";
+  const DirectionArrow = isRtl ? ArrowLeft : ArrowRight;
 
   // Retrieve localized strings
   const localizedBadge = t("talentPipeline.badge");
@@ -114,7 +116,7 @@ export function TalentPipeline() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
+                className="mt-3 type-section-title text-3xl sm:text-4xl"
               >
                 {localizedTitle}
               </motion.h2>
@@ -164,7 +166,7 @@ export function TalentPipeline() {
                         {stage.title}
                       </span>
                     </div>
-                    <ArrowRight
+                    <DirectionArrow
                       className={cn(
                         "size-4 shrink-0 transition-transform duration-300",
                         isActive ? "text-ruby translate-x-1" : "text-muted/40"

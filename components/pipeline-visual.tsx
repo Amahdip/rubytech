@@ -89,7 +89,7 @@ export function PipelineVisual() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
+              className="mt-3 type-section-title text-3xl sm:text-4xl"
             >
               {t("engine.title")}
             </motion.h2>

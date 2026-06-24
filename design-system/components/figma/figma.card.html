@@ -1,0 +1,61 @@
+<!-- @dsCard group="Components" viewport="700x320" name="Figma Components" subtitle="Materialized from Figma: Button variants, Input states, Checkboxes" -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <style>
+    body { background: #F5F5F9; padding: 20px; margin: 0; }
+    .section { margin-bottom: 20px; }
+    .label { font-size: 10px; color: #6F7285; font-family: sans-serif; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const ns = window.DesignSystem_92df5d;
+const { FigmaButton, NormalInput, Checkboxes, InputStates } = ns;
+
+function Card() {
+  return (
+    <div>
+      <div className="section">
+        <div className="label">FigmaButton — Primary, all sizes (from Figma)</div>
+        <div className="row">
+          <FigmaButton size="tiny"   type="primary" icon="none" state="normal" style2="light" />
+          <FigmaButton size="small"  type="primary" icon="none" state="normal" style2="light" />
+          <FigmaButton size="medium" type="primary" icon="none" state="normal" style2="light" />
+          <FigmaButton size="big"    type="primary" icon="none" state="normal" style2="light" />
+        </div>
+      </div>
+      <div className="section">
+        <div className="label">FigmaButton — Types</div>
+        <div className="row">
+          <FigmaButton size="medium" type="primary"   icon="none" state="normal" style2="light" />
+          <FigmaButton size="medium" type="secondary" icon="none" state="normal" style2="light" />
+          <FigmaButton size="medium" type="ghost"     icon="none" state="normal" style2="light" />
+          <FigmaButton size="medium" type="primary"   icon="none" state="disabled" style2="light" />
+        </div>
+      </div>
+      <div className="section">
+        <div className="label">Checkboxes</div>
+        <div className="row">
+          <Checkboxes active="active1" style2="light" />
+          <Checkboxes active="active2" style2="light" />
+          <Checkboxes active="active3" style2="light" />
+          <Checkboxes active="active4" style2="light" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Card />);
+</script>
+</body>
+</html>

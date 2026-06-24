@@ -1,0 +1,41 @@
+<!-- @dsCard group="Spacing" viewport="700x160" name="Radius & Shadow" subtitle="Border radii and elevation shadows" -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    body { background: #F5F5F9; padding: 20px; margin: 0; font-family: system-ui, sans-serif; }
+    .row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .item { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+    .box { width: 60px; height: 40px; background: #fff; }
+    .shadow-box { width: 80px; height: 48px; background: #fff; border-radius: 8px; }
+    .label { font-size: 10px; color: #6F7285; text-align: center; font-family: monospace; }
+    .divider { width: 1px; background: #E6E7EF; margin: 0 8px; }
+    .section { font-size: 10px; color: #9DA1B1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+<div style="display:flex;gap:32px;flex-wrap:wrap;">
+  <div>
+    <div class="section">Border Radius</div>
+    <div class="row">
+      <div class="item"><div class="box" style="border-radius:4px;border:1px solid #E6E7EF;"></div><div class="label">sm · 4px</div></div>
+      <div class="item"><div class="box" style="border-radius:8px;border:1px solid #E6E7EF;"></div><div class="label">md · 8px</div></div>
+      <div class="item"><div class="box" style="border-radius:12px;border:1px solid #E6E7EF;"></div><div class="label">lg · 12px</div></div>
+      <div class="item"><div class="box" style="border-radius:16px;border:1px solid #E6E7EF;"></div><div class="label">xl · 16px</div></div>
+      <div class="item"><div class="box" style="border-radius:100px;border:1px solid #E6E7EF;"></div><div class="label">pill</div></div>
+    </div>
+  </div>
+  <div>
+    <div class="section">Shadows</div>
+    <div class="row">
+      <div class="item"><div class="shadow-box" style="box-shadow:0 1px 3px rgba(41,42,51,0.08);"></div><div class="label">sm</div></div>
+      <div class="item"><div class="shadow-box" style="box-shadow:0 2px 8px rgba(41,42,51,0.10);"></div><div class="label">md</div></div>
+      <div class="item"><div class="shadow-box" style="box-shadow:0 4px 16px rgba(41,42,51,0.12);"></div><div class="label">lg</div></div>
+      <div class="item"><div class="shadow-box" style="box-shadow:0 1px 4px rgba(41,42,51,0.08),0 0 0 1px rgba(211,214,224,0.5);"></div><div class="label">card</div></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

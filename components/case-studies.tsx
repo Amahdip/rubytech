@@ -2,17 +2,36 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, TrendingUp, ExternalLink } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  TrendingUp,
+  ExternalLink,
+} from "lucide-react";
 
 import { useTranslation } from "@/hooks/use-translation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export function CaseStudies() {
-  const { t } = useTranslation();
-  const [activeIndex, setActiveIndex] = useState(0);
+type CaseStudyStat = {
+  value: string;
+  label: string;
+};
 
-  const caseStudies = t("caseStudies.items");
+type CaseStudyItem = {
+  client: string;
+  metric: string;
+  label: string;
+  description: string;
+  stats: CaseStudyStat[];
+};
+
+export function CaseStudies() {
+  const { t, locale } = useTranslation();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const isRtl = locale === "fa";
+
+  const caseStudies = t("caseStudies.items") as CaseStudyItem[];
 
   if (!Array.isArray(caseStudies) || caseStudies.length === 0) {
     return null;
@@ -55,7 +74,7 @@ export function CaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
+              className="mt-3 type-section-title text-3xl sm:text-4xl"
             >
               {t("caseStudies.title")}
             </motion.h2>
@@ -68,7 +87,11 @@ export function CaseStudies() {
               aria-label="Previous case study"
               onClick={handlePrevious}
             >
-              <ChevronLeft className="size-4" />
+              {isRtl ? (
+                <ChevronRight className="size-4" />
+              ) : (
+                <ChevronLeft className="size-4" />
+              )}
             </Button>
             <Button
               variant="secondary"
@@ -76,7 +99,11 @@ export function CaseStudies() {
               aria-label="Next case study"
               onClick={handleNext}
             >
-              <ChevronRight className="size-4" />
+              {isRtl ? (
+                <ChevronLeft className="size-4" />
+              ) : (
+                <ChevronRight className="size-4" />
+              )}
             </Button>
           </div>
         </div>
@@ -123,7 +150,7 @@ export function CaseStudies() {
               </div>
 
               <div className="grid grid-cols-3 gap-4 self-center">
-                {active.stats.map((stat: any) => (
+                {active.stats.map((stat) => (
                   <div
                     key={stat.label}
                     className="rounded-xl border border-border bg-panel-muted p-4 text-center"

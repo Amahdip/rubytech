@@ -1,0 +1,72 @@
+<!-- @dsCard group="Brand" viewport="700x320" name="Icon Set" subtitle="22 icons extracted from Figma — renders via Icon.jsx" -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    body { background: #fff; padding: 20px; margin: 0; }
+    .grid { display: flex; flex-wrap: wrap; gap: 16px; }
+    .item { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 72px; }
+    .box { width: 44px; height: 44px; background: #F5F5F9; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #292A33; }
+    .name { font-size: 9px; color: #6F7285; text-align: center; font-family: monospace; word-break: break-all; }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-type="module">
+// Inline the icon data directly for the card preview
+const iconData = {
+  AddIcon:        { viewBox:"0 0 24 24", body:'<path d="M 14 8 L 8 8 L 8 14 L 6 14 L 6 8 L 0 8 L 0 6 L 6 6 L 6 0 L 8 0 L 8 6 L 14 6 L 14 8 Z" fill="currentColor" transform="matrix(1 0 0 1 5 5)"/>' },
+  ArrowDownIcon:  { viewBox:"0 0 24 24", body:'<path d="M 10.59 0 L 6 4.58 L 1.41 0 L 0 1.41 L 6 7.41 L 12 1.41 L 10.59 0 Z" fill="currentColor" transform="matrix(1 0 0 1 6 8.59)"/>' },
+  HelpIcon:       { viewBox:"0 0 24 24", body:'<path d="M 9 16 L 11 16 L 11 14 L 9 14 L 9 16 Z M 10 0 C 4.48 0 0 4.48 0 10 C 0 15.52 4.48 20 10 20 C 15.52 20 20 15.52 20 10 C 20 4.48 15.52 0 10 0 Z M 10 18 C 5.59 18 2 14.41 2 10 C 2 5.59 5.59 2 10 2 C 14.41 2 18 5.59 18 10 C 18 14.41 14.41 18 10 18 Z M 10 4 C 7.79 4 6 5.79 6 8 L 8 8 C 8 6.9 8.9 6 10 6 C 11.1 6 12 6.9 12 8 C 12 10 9 9.75 9 13 L 11 13 C 11 10.75 14 10.5 14 8 C 14 5.79 12.21 4 10 4 Z" fill="currentColor" transform="matrix(1 0 0 1 2 2)"/>' },
+  LikeIcon:       { viewBox:"0 0 24 24", body:'<path d="M 14.5 0 C 12.76 0 11.09 0.81 10 2.09 C 8.91 0.81 7.24 0 5.5 0 C 2.42 0 0 2.42 0 5.5 C 0 9.28 3.4 12.36 8.55 17.04 L 10 18.35 L 11.45 17.03 C 16.6 12.36 20 9.28 20 5.5 C 20 2.42 17.58 0 14.5 0 Z" fill="currentColor" transform="matrix(1 0 0 1 2 3)"/>' },
+  HomeBlack:      { viewBox:"0 0 24 24", body:'<path d="M 7.989 0.392 C 8.265 0.14 8.626 0 9 0 C 9.374 0 9.735 0.14 10.011 0.392 L 17.511 7.207 C 17.669 7.357 17.788 7.525 17.87 7.712 C 17.952 7.898 17.997 8.099 18 8.303 L 18 16.987 C 18 17.385 17.842 17.767 17.561 18.048 C 17.279 18.329 16.898 18.487 16.5 18.487 L 12 18.487 L 12 12.487 L 6 12.487 L 6 18.487 L 1.5 18.487 C 1.102 18.487 0.721 18.329 0.439 18.048 C 0.158 17.767 0 17.385 0 16.987 L 0 8.303 Z" fill="currentColor" transform="matrix(1 0 0 1 3 2.5)"/>' },
+  Play:           { viewBox:"0 0 32 32", body:'<path d="M 0 0 L 21 12 L 0 24 Z" fill="currentColor" transform="matrix(1 0 0 1 6 4)"/>' },
+  VideoCamera:    { viewBox:"0 0 32 32", body:'<rect x="2" y="8" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M 20 11 L 28 7 L 28 25 L 20 21 Z" fill="currentColor"/>' },
+  RadioButton:    { viewBox:"0 0 32 32", body:'<circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="6" fill="currentColor"/>' },
+  GearSix:        { viewBox:"0 0 32 32", body:'<circle cx="16" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M 16 4 L 16 8 M 16 24 L 16 28 M 4 16 L 8 16 M 24 16 L 28 16 M 7 7 L 10 10 M 22 22 L 25 25 M 25 7 L 22 10 M 10 22 L 7 25" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' },
+  Notification:   { viewBox:"0 0 32 32", body:'<path d="M 16 4 C 11 4 8 8 8 13 L 8 20 L 5 23 L 27 23 L 24 20 L 24 13 C 24 8 21 4 16 4 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M 13 23 C 13 24.657 14.343 26 16 26 C 17.657 26 19 24.657 19 23" fill="none" stroke="currentColor" stroke-width="2"/>' },
+  Chat:           { viewBox:"0 0 32 32", body:'<path d="M 4 6 L 28 6 C 29.1 6 30 6.9 30 8 L 30 22 C 30 23.1 29.1 24 28 24 L 10 24 L 4 28 L 4 8 C 4 6.9 4.9 6 6 6 Z" fill="none" stroke="currentColor" stroke-width="2"/>' },
+  ChartLineUp:    { viewBox:"0 0 32 32", body:'<polyline points="4,24 10,16 16,20 22,10 28,6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="4,26 28,26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' },
+  AppWindow:      { viewBox:"0 0 32 32", body:'<rect x="4" y="6" width="24" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="10.5" r="1.5" fill="currentColor"/><circle cx="13.5" cy="10.5" r="1.5" fill="currentColor"/>' },
+  Layout:         { viewBox:"0 0 32 32", body:'<rect x="4" y="6" width="24" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><line x1="13" y1="6" x2="13" y2="26" stroke="currentColor" stroke-width="2"/><line x1="4" y1="13" x2="13" y2="13" stroke="currentColor" stroke-width="2"/>' },
+  Columns:        { viewBox:"0 0 32 32", body:'<rect x="4" y="8" width="8" height="16" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="15" y="8" width="8" height="16" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>' },
+  Textbox:        { viewBox:"0 0 32 32", body:'<rect x="4" y="8" width="24" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><line x1="16" y1="8" x2="16" y2="12" stroke="currentColor" stroke-width="2"/><line x1="16" y1="20" x2="16" y2="24" stroke="currentColor" stroke-width="2"/>' },
+  TextHOne:       { viewBox:"0 0 32 32", body:'<path d="M 4 8 L 4 24 M 4 16 L 14 16 M 14 8 L 14 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M 20 13 L 17 15 L 17 24 M 20 13 L 28 13 L 28 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' },
+  PaintBrushBroad:{ viewBox:"0 0 32 32", body:'<rect x="5" y="4" width="22" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M 11 18 C 11 18 11 26 16 26 C 21 26 21 18 21 18" fill="none" stroke="currentColor" stroke-width="2"/><line x1="5" y1="14" x2="27" y2="14" stroke="currentColor" stroke-width="2"/>' },
+  Confetti:       { viewBox:"0 0 32 32", body:'<path d="M 6 26 L 14 6 L 26 18 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="22" cy="10" r="2" fill="currentColor"/><circle cx="10" cy="20" r="1.5" fill="currentColor"/>' },
+  Tag:            { viewBox:"0 0 32 32", body:'<path d="M 4 4 L 4 16 L 18 28 C 19.1 29.1 20.9 29.1 22 28 L 28 22 C 29.1 20.9 29.1 19.1 28 18 L 16 4 Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="10" cy="10" r="2" fill="currentColor"/>' },
+  Sidebar:        { viewBox:"0 0 32 32", body:'<rect x="4" y="6" width="24" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><line x1="11" y1="6" x2="11" y2="26" stroke="currentColor" stroke-width="2"/>' },
+  Color:          { viewBox:"0 0 32 32", body:'<circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="13" r="2" fill="currentColor"/><circle cx="20" cy="13" r="2" fill="currentColor"/><circle cx="16" cy="20" r="2" fill="currentColor"/>' },
+};
+
+function Ic({ name, data }) {
+  return (
+    <div className="item">
+      <div className="box">
+        <svg width="22" height="22" viewBox={data.viewBox}
+          dangerouslySetInnerHTML={{ __html: data.body }} />
+      </div>
+      <div className="name">{name}</div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <div className="grid">
+      {Object.entries(iconData).map(([name, data]) => (
+        <Ic key={name} name={name} data={data} />
+      ))}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

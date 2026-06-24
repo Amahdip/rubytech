@@ -1,0 +1,160 @@
+/* ============================================================
+   Aparat Typography Tokens
+   Source: Aparat Color & Typography.fig — Typography page
+   Fonts: IRANSans(FaNum) → substituted with Vazirmatn (Google Fonts)
+          Open Sans, Roboto, Sanchez (Google Fonts)
+   ============================================================ */
+
+/* ── Web Fonts ──────────────────────────────────────────────── */
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&family=Sanchez&display=swap'); */
+
+/* IRANSansX — Persian primary typeface (provided font files) */
+@font-face {
+  font-family: 'IRANSans(FaNum)';
+  src: url('../assets/fonts/IRANSansX-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IRANSans(FaNum)';
+  src: url('../assets/fonts/IRANSansX-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Variable font (covers all weights) */
+@font-face {
+  font-family: 'IRANSansXV';
+  src: url('../assets/fonts/IRANSansXV.woff2') format('woff2'),
+       url('../assets/fonts/IRANSansXV.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Aliases so all references resolve */
+@font-face {
+  font-family: 'IRANSansFaNum';
+  src: url('../assets/fonts/IRANSansXV.woff2') format('woff2'),
+       url('../assets/fonts/IRANSansXV.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IRANSans';
+  src: url('../assets/fonts/IRANSansXV.woff2') format('woff2'),
+       url('../assets/fonts/IRANSansXV.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ── Font Families ──────────────────────────────── */
+  --font-persian:   'IRANSansXV', 'IRANSans(FaNum)', 'IRANSansFaNum', 'IRANSans', system-ui, sans-serif;
+  --font-latin:     'Open Sans', system-ui, sans-serif;
+  --font-mono:      'Roboto', monospace;
+  --font-display:   'Sanchez', serif;
+
+  /* ── Font Weights ───────────────────────────────── */
+  --fw-light:       300; /* @kind font */
+  --fw-regular:     400; /* @kind font */
+  --fw-medium:      500; /* @kind font */
+  --fw-semibold:    600; /* @kind font */
+  --fw-bold:        700; /* @kind font */
+
+  /* ── Type Scale (from Typography.fig) ────────────
+     Named after their semantic role in the Aparat UI  */
+
+  /* Heading 1 — single video page title */
+  --text-h1-size:        20px;
+  --text-h1-line:        36px;
+  --text-h1-weight:      var(--fw-medium);
+
+  /* Link Title — thumbnail / channel linked title */
+  --text-link-title-size:  15.5px;
+  --text-link-title-line:  25px;
+  --text-link-title-weight: var(--fw-regular);
+
+  /* Heading 3 — section headings, dashboards */
+  --text-h3-size:        14px;
+  --text-h3-weight:      var(--fw-medium);
+
+  /* Heading 4 — channel, label, input-title */
+  --text-h4-size:        14px;
+  --text-h4-line:        17px;
+  --text-h4-weight:      var(--fw-regular);
+
+  /* Heading 06 — address / meta heading */
+  --text-h6-size:        12px;
+  --text-h6-line:        14px;
+  --text-h6-weight:      var(--fw-medium);
+
+  /* Paragraph — descriptions, body copy */
+  --text-paragraph-size:  12.5px;
+  --text-paragraph-line:  28px;
+  --text-paragraph-weight: var(--fw-regular);
+
+  /* Link — inline links */
+  --text-link-size:       11.5px;
+  --text-link-line:       20px;
+
+  /* Meta — meta-text, caption-meta, views */
+  --text-meta-size:       11px;
+  --text-meta-line:       16px;
+  --text-meta-weight:     var(--fw-regular);
+
+  /* Button — button labels */
+  --text-button-size:     12.5px;
+  --text-button-line:     14.5px;
+  --text-button-weight:   var(--fw-medium);
+
+  /* Text Button — menu-title inline action */
+  --text-text-button-size:  11px;
+  --text-text-button-weight: var(--fw-semibold);
+
+  /* Tab — tab bar items */
+  --text-tab-size:        12.5px;
+  --text-tab-line:        14.5px;
+  --text-tab-weight:      var(--fw-medium);
+
+  /* Comment / Caption */
+  --text-comment-size:    11px;
+  --text-comment-line:    19px;
+  --text-comment-weight:  var(--fw-regular);
+
+  /* Replay / Caption / Tag */
+  --text-caption-size:    11px;
+  --text-caption-line:    22px;
+
+  /* Small text — comment-date, timestamps */
+  --text-small-size:      10px;
+  --text-small-line:      2px; /* effectively single line */
+
+  /* Menu — sidebar/nav items */
+  --text-menu-size:       13px;
+  --text-menu-line:       26px;
+  --text-menu-weight:     var(--fw-medium);
+
+  /* Label — input/form labels */
+  --text-label-size:      13px;
+  --text-label-line:      26px;
+  --text-label-weight:    var(--fw-regular);
+
+  /* Number — dashboard stats */
+  --text-number-size:     21px;
+  --text-number-weight:   var(--fw-bold);
+
+  /* Value Label — chips, value-item */
+  --text-value-label-size: 11px;
+  --text-value-label-line: 19px;
+
+  /* Generic — single-details__view */
+  --text-generic-size:    14px;
+  --text-generic-weight:  var(--fw-regular);
+}

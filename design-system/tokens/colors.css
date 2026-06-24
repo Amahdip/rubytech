@@ -1,0 +1,76 @@
+/* ============================================================
+   Aparat Color Tokens
+   Source: Aparat Color & Typography.fig — Color-Palette & Color-Mapping
+   ============================================================ */
+
+:root {
+  /* ── Brand ─────────────────────────────────────── */
+  --color-brand:          #DF0F50;   /* Primary — buttons, icons, accent */
+  --color-brand-dark:     #FA3879;   /* Primary/Dark — interactive states */
+  --color-brand-bg:       rgba(250, 56, 121, 0.12); /* Primary/BG — subtle fills */
+
+  /* ── Secondary & Tertiary ────────────────────── */
+  --color-secondary:      #05A3E8;   /* Blue — secondary buttons, info */
+  --color-tertiary:       #00B96C;   /* Green — tertiary buttons, success */
+
+  /* ── Neutral Scale ────────────────────────────── */
+  --color-white:          #FFFFFF;
+  --color-gray-10:        #FBFBFC;   /* Default / Home background */
+  --color-gray-20:        #F5F5F9;   /* Subtle borders, searchbox, hover */
+  --color-gray-30:        #E6E7EF;   /* Separators, strokes */
+  --color-gray-40:        #D3D6E0;   /* Toggle bg, medium borders */
+  --color-gray-50:        #6F7285;   /* Primary icons, meta text */
+  --color-gray-60:        #484B62;   /* Input labels, secondary text */
+  --color-gray-70:        #292A33;   /* Body text, headings, playlist header */
+
+  /* ── Dark Palette ─────────────────────────────── */
+  --color-dark-01:        #9DA1B1;   /* Header/description icons */
+  --color-dark-02:        #212226;   /* High-contrast backgrounds */
+  --color-dark-03:        #161616;   /* Deep dark */
+
+  /* ── Semantic ─────────────────────────────────── */
+  --color-danger:         #FF4242;   /* Error */
+  --color-danger-bg:      #FEF4F7;   /* Error background / chip */
+  --color-success:        #00B96C;   /* Success */
+  --color-success-bg:     #F5FDF9;   /* Success background / chip */
+  --color-warning:        #EACE3B;   /* Warning */
+  --color-warning-bg:     #FDF9E8;   /* Warning background / chip */
+  --color-info:           #05A3E8;   /* Information / blue */
+  --color-info-bg:        #E9F8FF;   /* Info background / chip */
+
+  /* Dark variants of semantic backgrounds */
+  --color-danger-bg-dark:  #FEF4F7;
+  --color-success-bg-dark: #F5FDF9;
+  --color-warning-bg-dark: #FDF9E8;
+  --color-info-bg-dark:    #E9F8FF;
+
+  /* ── Overlays ─────────────────────────────────── */
+  --color-modal-dim:      rgba(41, 42, 51, 0.75);
+
+  /* ── Semantic Aliases (Light Theme) ──────────── */
+  --surface-home:         var(--color-gray-10);     /* Page / Home background */
+  --surface-sidebar:      var(--color-white);       /* Sidebar background */
+  --surface-topbar:       var(--color-white);       /* Top bar */
+  --surface-card:         var(--color-white);       /* Cards / boxes */
+  --surface-searchbox:    var(--color-gray-20);     /* Search input fill */
+  --surface-playlist-hd:  var(--color-gray-70);     /* Playlist header bg */
+
+  --border-default:       var(--color-gray-30);     /* Default borders */
+  --border-input:         var(--color-gray-60);     /* Input field borders */
+  --border-hover:         var(--color-gray-20);     /* Hover / active bg */
+
+  --text-heading:         var(--color-gray-70);     /* Main headings */
+  --text-body:            var(--color-gray-70);     /* Body copy */
+  --text-secondary:       var(--color-gray-60);     /* Labels, subtitles */
+  --text-meta:            var(--color-gray-50);     /* Meta, captions */
+  --text-placeholder:     var(--color-gray-30);     /* Placeholder */
+  --text-inverse:         var(--color-white);       /* Text on dark */
+  --text-searchbar:       var(--color-gray-50);     /* Searchbar text */
+
+  --icon-primary:         var(--color-gray-50);     /* Sidebar / nav icons */
+  --icon-header:          var(--color-dark-01);     /* Header / description icons */
+  --icon-brand:           var(--color-brand);       /* Brand accent icons */
+
+  --toggle-bg:            var(--color-gray-40);
+  --separator:            var(--color-gray-30);
+}

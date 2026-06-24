@@ -43,7 +43,7 @@ export function ContactCta() {
               </p>
               <h2
                 id="contact-heading"
-                className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
+                className="mt-3 type-section-title text-3xl sm:text-4xl"
               >
                 {t("contact.title")}
               </h2>

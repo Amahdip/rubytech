@@ -41,10 +41,10 @@ export function MainNav() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="sticky top-0 z-50 px-0 sm:px-3">
       <nav
         aria-label="Main navigation"
-        className="glass-strong mx-auto mt-4 flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3 sm:px-6"
+        className="mx-auto flex w-full max-w-6xl items-center justify-between border-b border-border/60 bg-background/95 px-4 py-3 shadow-sm backdrop-blur-md sm:mt-4 sm:w-[calc(100%-3rem)] sm:rounded-2xl sm:border sm:bg-[var(--glass-strong-bg)] sm:shadow-none sm:backdrop-blur-xl sm:px-6"
       >
         <Link href="/" className="flex items-center gap-2.5">
           <span
@@ -53,7 +53,7 @@ export function MainNav() {
           >
             <span className="size-3 rounded-full bg-ruby ruby-glow" />
           </span>
-          <span className="text-lg font-bold tracking-tight">
+          <span className="text-lg font-semibold">
             Tech<span className="text-ruby">Ruby</span>
           </span>
         </Link>
@@ -131,7 +131,7 @@ export function MainNav() {
       <div
         id="mobile-menu"
         className={cn(
-          "glass-strong mx-4 mt-2 overflow-hidden rounded-2xl transition-all duration-300 md:hidden",
+          "mx-0 mt-2 overflow-hidden border-b border-border/60 bg-background/95 transition-all duration-300 backdrop-blur-md md:hidden sm:mx-3 sm:rounded-2xl sm:border sm:bg-[var(--glass-strong-bg)] sm:backdrop-blur-xl",
           mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
         )}
       >

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="App Shell" description="Blank sidebar + topbar + content slot. Edit CONFIG at top of script to customize nav, app name, and brand color." -->
+<helmet>
+  <link rel="stylesheet" href="./ds-base.js" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body { font-family: 'IRANSansXV','IRANSans(FaNum)',system-ui,sans-serif; background: var(--surface-page,#FBFBFC); color: var(--text-primary,#292A33); direction: rtl; }
+    ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: var(--border-color,#E6E7EF); border-radius: 4px; }
+    :root {
+      --brand:#DF0F50; --brand-dark:#FA3879; --brand-bg:rgba(223,15,80,0.10);
+      --surface-page:#FBFBFC; --surface-panel:#FFFFFF; --surface-subtle:#F5F5F9;
+      --border-color:#E6E7EF; --text-primary:#292A33; --text-secondary:#484B62;
+      --text-muted:#6F7285; --text-on-brand:#FFFFFF;
+      --radius-component:4px; --radius-card:8px; --radius-chip:100px;
+      --sidebar-w:220px; --topbar-h:60px;
+    }
+  </style>
+  <script type="text/babel">
+/* ══════════════════════════════════════════════════
+   CONFIGURATION — edit this block for each project
+   ══════════════════════════════════════════════════ */
+const CONFIG = {
+  appName: 'App Name',
+  logo: null,
+  nav: [
+    { id: 'home',     icon: 'home',     label: 'Home'              },
+    { id: 'explore',  icon: 'compass',  label: 'Explore'           },
+    { id: 'saved',    icon: 'bookmark', label: 'Saved'             },
+    { id: 'messages', icon: 'chat',     label: 'Messages', badge:'3'},
+    { id: 'settings', icon: 'settings', label: 'Settings'          },
+  ],
+  searchPlaceholder: 'Search…',
+};
+
+const ICONS = {
+  home:'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z',
+  compass:'M12 2a10 10 0 100 20 10 10 0 000-20zm4.24 6.24l-2.83 7.07-7.07 2.83 2.83-7.07 7.07-2.83z',
+  bookmark:'M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z',
+  chat:'M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z',
+  settings:'M12 15a3 3 0 100-6 3 3 0 000 6zm0-12v2m0 16v2m-7.07-14.07l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41',
+  search:'M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z',
+  bell:'M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9m-6 13a2 2 0 01-4 0',
+  user:'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2m8-10a4 4 0 100-8 4 4 0 000 8z',
+  plus:'M12 5v14M5 12h14',
+  grid:'M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z',
+};
+
+function Icon({ name, size=18, color='currentColor' }) {
+  const d = ICONS[name]; if (!d) return null;
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d={d}/></svg>;
+}
+
+function Logo({ name, custom }) {
+  if (custom) return custom;
+  return (
+    <div style={{display:'flex',alignItems:'center',gap:10}}>
+      <div style={{width:32,height:32,borderRadius:8,background:'var(--brand)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+        <Icon name="grid" size={16} color="white"/>
+      </div>
+      <span style={{fontSize:16,fontWeight:700,color:'var(--brand)',fontFamily:'inherit',letterSpacing:-0.3}}>{name}</span>
+    </div>
+  );
+}
+
+function Sidebar({ nav, appName, logo, activeId, onNav }) {
+  return (
+    <aside style={{width:'var(--sidebar-w)',flexShrink:0,height:'100%',background:'var(--surface-panel)',borderInlineEnd:'1px solid var(--border-color)',display:'flex',flexDirection:'column'}}>
+      <div style={{height:'var(--topbar-h)',display:'flex',alignItems:'center',padding:'0 16px',borderBottom:'1px solid var(--border-color)',flexShrink:0}}>
+        <Logo name={appName} custom={logo}/>
+      </div>
+      <nav style={{flex:1,overflowY:'auto',padding:'12px 8px',display:'flex',flexDirection:'column',gap:2}}>
+        {nav.map(item => {
+          const a = activeId === item.id;
+          return (
+            <button key={item.id} onClick={() => onNav(item.id)} style={{display:'flex',alignItems:'center',gap:10,padding:'9px 12px',borderRadius:'var(--radius-card)',border:'none',cursor:'pointer',direction:'inherit',background:a?'var(--surface-subtle)':'transparent',color:a?'var(--brand)':'var(--text-secondary)',fontFamily:'inherit',fontSize:13,fontWeight:a?600:400,transition:'background 0.1s',width:'100%',textAlign:'inherit'}}>
+              <Icon name={item.icon} size={18} color={a?'var(--brand)':'var(--text-muted)'}/>
+              <span style={{flex:1}}>{item.label}</span>
+              {item.badge && <span style={{fontSize:10,fontWeight:600,background:'var(--brand)',color:'var(--text-on-brand)',borderRadius:'var(--radius-chip)',padding:'1px 6px'}}>{item.badge}</span>}
+            </button>
+          );
+        })}
+      </nav>
+      <div style={{padding:'12px 16px',borderTop:'1px solid var(--border-color)',display:'flex',alignItems:'center',gap:10}}>
+        <div style={{width:32,height:32,borderRadius:'50%',background:'var(--surface-subtle)',border:'1px solid var(--border-color)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+          <Icon name="user" size={16} color="var(--text-muted)"/>
+        </div>
+        <div style={{fontSize:12,color:'var(--text-muted)',lineHeight:1.4}}>
+          <div style={{color:'var(--text-primary)',fontWeight:500,fontSize:13}}>Username</div>
+          <div>user@example.com</div>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+function Topbar({ searchPlaceholder }) {
+  return (
+    <header style={{height:'var(--topbar-h)',background:'var(--surface-panel)',borderBottom:'1px solid var(--border-color)',display:'flex',alignItems:'center',padding:'0 20px',gap:12,flexShrink:0}}>
+      <div style={{flex:1,maxWidth:400,display:'flex',alignItems:'center',height:36,background:'var(--surface-subtle)',borderRadius:'var(--radius-chip)',padding:'0 14px',gap:8}}>
+        <Icon name="search" size={15} color="var(--text-muted)"/>
+        <input placeholder={searchPlaceholder} style={{border:'none',background:'transparent',outline:'none',fontSize:13,fontFamily:'inherit',color:'var(--text-primary)',width:'100%',direction:'inherit'}}/>
+      </div>
+      <div style={{flex:1}}/>
+      <div style={{display:'flex',alignItems:'center',gap:8}}>
+        <button style={{width:36,height:36,borderRadius:'50%',border:'none',background:'transparent',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--text-muted)'}}>
+          <Icon name="bell" size={20}/>
+        </button>
+        <button style={{display:'inline-flex',alignItems:'center',gap:6,height:34,padding:'0 14px',borderRadius:'var(--radius-component)',border:'none',background:'var(--brand)',color:'var(--text-on-brand)',fontSize:13,fontWeight:500,fontFamily:'inherit',cursor:'pointer'}}>
+          <Icon name="plus" size={15} color="white"/><span>Action</span>
+        </button>
+        <div style={{width:32,height:32,borderRadius:'50%',background:'var(--surface-subtle)',border:'1px solid var(--border-color)',display:'flex',alignItems:'center',justifyContent:'center',cursor:'pointer'}}>
+          <Icon name="user" size={16} color="var(--text-muted)"/>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function ContentPlaceholder({ activeId }) {
+  return (
+    <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column',gap:16,color:'var(--text-muted)',userSelect:'none'}}>
+      <div style={{width:64,height:64,borderRadius:16,background:'var(--surface-subtle)',display:'flex',alignItems:'center',justifyContent:'center'}}>
+        <Icon name="grid" size={28} color="var(--border-color)"/>
+      </div>
+      <div style={{textAlign:'center',lineHeight:1.6}}>
+        <div style={{fontSize:15,fontWeight:500,color:'var(--text-secondary)',marginBottom:4}}>{activeId} screen</div>
+        <div style={{fontSize:13}}>Replace this with your screen component</div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [activeId, setActiveId] = React.useState(CONFIG.nav[0]?.id || 'home');
+  return (
+    <div style={{display:'flex',height:'100vh',overflow:'hidden',direction:'rtl'}}>
+      <Sidebar nav={CONFIG.nav} appName={CONFIG.appName} logo={CONFIG.logo} activeId={activeId} onNav={setActiveId}/>
+      <div style={{flex:1,display:'flex',flexDirection:'column',overflow:'hidden'}}>
+        <Topbar searchPlaceholder={CONFIG.searchPlaceholder}/>
+        <main style={{flex:1,overflowY:'auto',display:'flex'}}>
+          <ContentPlaceholder activeId={activeId}/>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('__shell_root')).render(<App/>);
+  </script>
+</helmet>
+<div id="__shell_root" style="height: 100vh; overflow: hidden;"></div>
+</x-dc>
+</body>
+</html>

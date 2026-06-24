@@ -1,0 +1,61 @@
+/* ============================================================
+   theme.css — THE ONE FILE YOU EDIT PER PROJECT
+   Copy this file into your project and override any variable.
+   Import it AFTER styles.css so it wins the cascade.
+
+   Quick start:
+     1. Set --brand-* to your primary color
+     2. Set --font-primary to your main typeface
+     3. Set --dir to rtl or ltr
+   ============================================================ */
+
+:root {
+  /* ── Brand color (change these per project) ──────── */
+  --brand:          #DF0F50;   /* Primary action color */
+  --brand-dark:     #FA3879;   /* Hover / active state */
+  --brand-bg:       rgba(223, 15, 80, 0.10); /* Tinted fill */
+
+  /* ── Secondary & tertiary accents ───────────────── */
+  --accent-blue:    #05A3E8;
+  --accent-green:   #00B96C;
+
+  /* ── Typography ─────────────────────────────────── */
+  --font-primary:   'IRANSansXV', 'IRANSans(FaNum)', system-ui, sans-serif;
+  --font-secondary: 'Open Sans', system-ui, sans-serif;
+  --font-code:      'Roboto Mono', monospace;
+
+  /* ── Layout direction (rtl | ltr) ───────────────── */
+  --dir: rtl; /* @kind other */
+
+  /* ── Surface colors — override for dark mode ─────── */
+  --surface-page:   #FBFBFC;
+  --surface-panel:  #FFFFFF;
+  --surface-raised: #FFFFFF;
+  --surface-subtle: #F5F5F9;
+
+  /* ── Border ──────────────────────────────────────── */
+  --border-color:   #E6E7EF;
+
+  /* ── Text ────────────────────────────────────────── */
+  --text-primary:   #292A33;
+  --text-secondary: #484B62;
+  --text-muted:     #6F7285;
+  --text-on-brand:  #FFFFFF;
+
+  /* ── Radius ─────────────────────────────────────── */
+  --radius-component: 4px;   /* buttons, inputs */
+  --radius-card:      8px;   /* cards, panels */
+  --radius-chip:    100px;   /* tags, badges */
+}
+
+/* ── Example overrides for a different project ───────
+   Uncomment and adjust:
+
+:root {
+  --brand:       #2563EB;
+  --brand-dark:  #1D4ED8;
+  --brand-bg:    rgba(37, 99, 235, 0.10);
+  --font-primary: 'Inter', system-ui, sans-serif;
+  --dir: ltr;
+}
+──────────────────────────────────────────────────── */

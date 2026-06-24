@@ -1,0 +1,309 @@
+<!-- @startingPoint section="UI Kits" subtitle="Aparat video platform — home feed with sidebar nav" viewport="1280x800" -->
+<!-- @dsCard group="Aparat" viewport="1280x800" name="Aparat Home" subtitle="Full home feed with sidebar, topbar, video grid" -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>آپارات — صفحه نخست</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    html, body { height: 100%; overflow: hidden; margin: 0; }
+    body { background: #FBFBFC; font-family: 'Vazirmatn', 'IRANSans', sans-serif; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: #D3D6E0; border-radius: 4px; }
+    * { box-sizing: border-box; }
+  </style>
+</head>
+<body>
+<div id="root" style="height:100%;"></div>
+<script type="text/babel">
+
+/* ── Tiny icon helper ──────────────────────────────── */
+function Icon({ d, size = 20, color = 'currentColor', fill = 'none' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={fill}
+      stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d={d} />
+    </svg>
+  );
+}
+
+const IC = {
+  home:     'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z',
+  compass:  'M12 2a10 10 0 100 20 10 10 0 000-20zm4.24 6.24l-2.83 7.07-7.07 2.83 2.83-7.07 7.07-2.83z',
+  live:     'M6.3 5.5a8 8 0 0111.4 0M3.5 2.7a12 12 0 0117 0M12 17a2 2 0 100-4 2 2 0 000 4z',
+  playlist: 'M3 6h18M3 12h12M3 18h8',
+  bookmark: 'M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z',
+  history:  'M3 12a9 9 0 109-9H3m0 0l3-3M3 3l3 3m3 3v5l4 2',
+  settings: 'M12 15a3 3 0 100-6 3 3 0 000 6zm-8.66-1.5a8 8 0 000-3l-1.83-.5a9 9 0 010 4l1.83-.5zM5.5 5.5l1.41 1.41a8 8 0 012.12-2.12L8.5 3.05a10 10 0 00-3 2.45zm13 0a10 10 0 00-3-2.45l-.53 1.74a8 8 0 012.12 2.12L18.5 5.5zm2.16 6.5l-1.83.5a8 8 0 010 3l1.83.5a9 9 0 000-4zM18.5 18.5l-1.41-1.41a8 8 0 01-2.12 2.12l.53 1.74a10 10 0 003-2.45zm-13 0a10 10 0 003 2.45l.53-1.74a8 8 0 01-2.12-2.12L5.5 18.5z',
+  bell:     'M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9m-6 13a2 2 0 01-4 0',
+  search:   'M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z',
+  upload:   'M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4m14-7l-5-5-5 5m5-5v12',
+  user:     'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2m8-10a4 4 0 100-8 4 4 0 000 8z',
+  play:     'M8 5v14l11-7z',
+};
+
+/* ── Button ─────────────────────────────────────────── */
+const variantBtn = {
+  primary:   { bg: '#DF0F50', hover: '#FA3879', color: '#fff', border: 'none' },
+  secondary: { bg: '#05A3E8', hover: '#0491d0', color: '#fff', border: 'none' },
+  tertiary:  { bg: '#00B96C', hover: '#009a5a', color: '#fff', border: 'none' },
+  ghost:     { bg: 'transparent', hover: 'rgba(223,15,80,0.08)', color: '#DF0F50', border: '1.5px solid #DF0F50' },
+};
+const sizeBtn = {
+  tiny:   { h: 28, px: 10, fs: 11 },
+  small:  { h: 32, px: 14, fs: 12 },
+  medium: { h: 36, px: 16, fs: 12.5 },
+  large:  { h: 44, px: 20, fs: 13 },
+};
+function Button({ children, variant = 'primary', size = 'medium', disabled, onClick, style: sx = {} }) {
+  const [hov, setHov] = React.useState(false);
+  const v = variantBtn[variant] || variantBtn.primary;
+  const s = sizeBtn[size] || sizeBtn.medium;
+  return (
+    <button onClick={onClick} disabled={disabled}
+      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
+      style={{
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 5,
+        height: s.h, padding: `0 ${s.px}px`, fontSize: s.fs, fontWeight: 500,
+        fontFamily: 'Vazirmatn, sans-serif', borderRadius: 4, border: v.border || 'none',
+        background: disabled ? '#D3D6E0' : hov ? v.hover : v.bg,
+        color: disabled ? '#6F7285' : v.color,
+        cursor: disabled ? 'not-allowed' : 'pointer', whiteSpace: 'nowrap',
+        transition: 'background 0.15s', outline: 'none', ...sx,
+      }}>
+      {children}
+    </button>
+  );
+}
+
+/* ── Tag chip ───────────────────────────────────────── */
+function Tag({ children, active, onClick }) {
+  return (
+    <span onClick={onClick} style={{
+      display: 'inline-flex', alignItems: 'center', padding: '4px 12px',
+      borderRadius: 100, fontSize: 12, fontFamily: 'Vazirmatn, sans-serif',
+      background: active ? 'rgba(223,15,80,0.1)' : '#F5F5F9',
+      color: active ? '#DF0F50' : '#484B62',
+      border: active ? '1px solid #DF0F50' : '1px solid #E6E7EF',
+      cursor: 'pointer', whiteSpace: 'nowrap', userSelect: 'none',
+      transition: 'all 0.12s',
+    }}>{children}</span>
+  );
+}
+
+/* ── VideoCard ──────────────────────────────────────── */
+function VideoCard({ title, channel, views, ago, duration, isLive }) {
+  const [hov, setHov] = React.useState(false);
+  return (
+    <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
+      style={{ display: 'flex', flexDirection: 'column', gap: 8, cursor: 'pointer', direction: 'rtl' }}>
+      {/* Thumbnail */}
+      <div style={{
+        position: 'relative', borderRadius: 8, overflow: 'hidden',
+        aspectRatio: '16/9', background: '#E6E7EF', flexShrink: 0,
+      }}>
+        <div style={{
+          width: '100%', height: '100%', background: hov ? '#D3D6E0' : '#E6E7EF',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          transition: 'background 0.2s',
+        }}>
+          <Icon d={IC.play} size={28} color="#9DA1B1" fill="#9DA1B1" />
+        </div>
+        <div style={{
+          position: 'absolute', bottom: 6, left: 6,
+          background: isLive ? '#DF0F50' : 'rgba(0,0,0,0.75)',
+          color: '#fff', fontSize: 10, fontWeight: 700, fontFamily: 'Roboto, sans-serif',
+          padding: '2px 5px', borderRadius: 3, letterSpacing: 0.3,
+        }}>
+          {isLive ? 'LIVE' : duration}
+        </div>
+      </div>
+      {/* Meta */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <div style={{
+          fontSize: 13, fontFamily: 'Vazirmatn, sans-serif', fontWeight: 400,
+          color: hov ? '#DF0F50' : '#292A33', lineHeight: '20px',
+          display: '-webkit-box', WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical', overflow: 'hidden',
+          transition: 'color 0.15s',
+        }}>{title}</div>
+        <div style={{ fontSize: 11, color: '#6F7285', fontFamily: 'Vazirmatn, sans-serif', lineHeight: '16px' }}>
+          <div>{channel}</div>
+          <div>{views} · {ago}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Data ───────────────────────────────────────────── */
+const navItems = [
+  { icon: 'home',     label: 'صفحه نخست'   },
+  { icon: 'compass',  label: 'کشف کنید'    },
+  { icon: 'live',     label: 'پخش زنده'    },
+  { icon: 'playlist', label: 'ویدیوهای من' },
+  { icon: 'bookmark', label: 'بعدا می‌بینم' },
+  { icon: 'history',  label: 'تاریخچه'     },
+];
+
+const categories = ['همه','موسیقی','آموزش','سرگرمی','ورزش','خبر','بازی','مستند','طنز','علم'];
+
+const videos = [
+  { duration:'14:45', title:'آموزش طراحی رابط کاربری با فیگما — از صفر تا صد', channel:'کانال آموزشی', views:'۱۴ هزار بازدید', ago:'۸ هفته پیش' },
+  { duration:'5:21',  title:'معرفی ویژگی‌های جدید آپارات ۲۰۲۵',               channel:'آپارات رسمی',  views:'۹۲ هزار بازدید', ago:'۳ روز پیش' },
+  { duration:'22:10', title:'نقد و بررسی گوشی جدید سامسونگ گلکسی اس ۲۵',      channel:'تک‌نیوز',      views:'۳.۲ هزار بازدید',ago:'۱ روز پیش' },
+  { isLive:true,      title:'پخش زنده: مسابقه فینال لیگ برتر',                 channel:'ورزش ۳',       views:'۵.۸ هزار بازدید',ago:'همین الان' },
+  { duration:'8:03',  title:'طرز تهیه کیک شکلاتی خانگی خوشمزه',               channel:'آشپزخانه من',  views:'۶۷۰ بازدید',    ago:'۲ هفته پیش' },
+  { duration:'31:44', title:'مستند: طبیعت ایران — جنگل‌های شمال',              channel:'مستندهای برتر',views:'۲۵ هزار بازدید',ago:'۱ ماه پیش' },
+  { duration:'3:55',  title:'کلیپ طنز: وقتی برنامه‌نویس با دیزاینر بحث می‌کنه',channel:'طنزستان',     views:'۱۱۰ هزار بازدید',ago:'۵ روز پیش' },
+  { duration:'47:00', title:'پادکست: آینده هوش مصنوعی در ایران',               channel:'آینده‌نگر',    views:'۴.۱ هزار بازدید',ago:'۳ هفته پیش' },
+];
+
+/* ── Sidebar ────────────────────────────────────────── */
+function Sidebar({ active, setActive }) {
+  return (
+    <div style={{
+      width: 220, flexShrink: 0, height: '100%', background: '#fff',
+      borderLeft: '1px solid #E6E7EF', display: 'flex', flexDirection: 'column',
+      padding: '0 0 16px', overflowY: 'auto',
+    }}>
+      {/* Logo */}
+      <div style={{ padding: '16px 20px 20px', display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid #F5F5F9' }}>
+        <div style={{
+          width: 32, height: 32, borderRadius: 8, background: '#DF0F50',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+        }}>
+          <Icon d={IC.play} size={16} color="white" fill="white" />
+        </div>
+        <span style={{ fontSize: 18, fontWeight: 700, color: '#DF0F50', fontFamily: 'Vazirmatn, sans-serif', letterSpacing: -0.5 }}>آپارات</span>
+      </div>
+
+      {/* Nav */}
+      <nav style={{ display: 'flex', flexDirection: 'column', gap: 2, padding: '12px 8px' }}>
+        {navItems.map((item, i) => (
+          <div key={i} onClick={() => setActive(i)} style={{
+            display: 'flex', alignItems: 'center', gap: 10, padding: '9px 12px',
+            borderRadius: 8, cursor: 'pointer', direction: 'rtl',
+            background: active === i ? '#F5F5F9' : 'transparent',
+            color: active === i ? '#DF0F50' : '#484B62',
+            transition: 'background 0.1s',
+          }}>
+            <Icon d={IC[item.icon]} size={18} color={active === i ? '#DF0F50' : '#6F7285'} />
+            <span style={{ fontSize: 13, fontWeight: active === i ? 600 : 400, fontFamily: 'Vazirmatn, sans-serif' }}>
+              {item.label}
+            </span>
+          </div>
+        ))}
+      </nav>
+
+      <div style={{ height: 1, background: '#E6E7EF', margin: '4px 16px 8px' }} />
+
+      <div style={{ padding: '0 8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 12px', cursor: 'pointer', color: '#6F7285', direction: 'rtl' }}>
+          <Icon d={IC.settings} size={18} color="#6F7285" />
+          <span style={{ fontSize: 13, fontFamily: 'Vazirmatn, sans-serif' }}>تنظیمات</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Topbar ─────────────────────────────────────────── */
+function Topbar() {
+  return (
+    <div style={{
+      height: 60, background: '#fff', borderBottom: '1px solid #E6E7EF',
+      display: 'flex', alignItems: 'center', padding: '0 20px', gap: 12,
+      flexShrink: 0, direction: 'rtl',
+    }}>
+      {/* Search */}
+      <div style={{
+        flex: 1, maxWidth: 400, display: 'flex', alignItems: 'center',
+        height: 36, background: '#F5F5F9', borderRadius: 100,
+        padding: '0 14px', gap: 8, direction: 'rtl',
+      }}>
+        <Icon d={IC.search} size={15} color="#6F7285" />
+        <input placeholder="جستجو در آپارات..." style={{
+          border: 'none', background: 'transparent', outline: 'none',
+          fontSize: 13, fontFamily: 'Vazirmatn, sans-serif', color: '#292A33',
+          width: '100%', direction: 'rtl',
+        }} />
+      </div>
+
+      <div style={{ flex: 1 }} />
+
+      {/* Actions */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{
+          width: 36, height: 36, borderRadius: '50%', display: 'flex',
+          alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#6F7285',
+          transition: 'background 0.1s',
+        }}>
+          <Icon d={IC.bell} size={20} color="#6F7285" />
+        </div>
+        <Button variant="primary" size="small">
+          <Icon d={IC.upload} size={14} color="white" />
+          <span>آپلود</span>
+        </Button>
+        <div style={{
+          width: 32, height: 32, borderRadius: '50%', background: '#DF0F50',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+        }}>
+          <Icon d={IC.user} size={16} color="white" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── App ────────────────────────────────────────────── */
+function App() {
+  const [activeNav, setActiveNav] = React.useState(0);
+  const [activeCat, setActiveCat] = React.useState(0);
+
+  return (
+    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+      <Sidebar active={activeNav} setActive={setActiveNav} />
+
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <Topbar />
+
+        {/* Category strip */}
+        <div style={{
+          background: '#fff', borderBottom: '1px solid #E6E7EF',
+          padding: '10px 20px', display: 'flex', gap: 8,
+          overflowX: 'auto', flexShrink: 0, direction: 'rtl',
+        }}>
+          {categories.map((cat, i) => (
+            <Tag key={i} active={activeCat === i} onClick={() => setActiveCat(i)}>{cat}</Tag>
+          ))}
+        </div>
+
+        {/* Feed */}
+        <div style={{ flex: 1, overflowY: 'auto', padding: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, direction: 'rtl' }}>
+            <span style={{ fontSize: 14, fontWeight: 600, color: '#292A33', fontFamily: 'Vazirmatn, sans-serif' }}>پیشنهادی برای شما</span>
+            <Button variant="ghost" size="small">نمایش همه</Button>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+            gap: 20, direction: 'rtl',
+          }}>
+            {videos.map((v, i) => <VideoCard key={i} {...v} />)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
