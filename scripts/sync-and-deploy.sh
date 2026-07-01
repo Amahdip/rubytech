@@ -5,7 +5,7 @@ set -euo pipefail
 # Usage: ./scripts/sync-and-deploy.sh
 
 SSH_HOST="${SSH_HOST:-survey-salamruby}"
-REMOTE_DIR="${REMOTE_DIR:-/home/ubuntu/rubytech}"
+REMOTE_DIR="${REMOTE_DIR:-/home/ubuntu/techruby}"
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 log() { echo "[sync-deploy] $*"; }

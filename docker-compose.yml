@@ -13,7 +13,7 @@ services:
       RESEND_PROXY_URL: ${RESEND_PROXY_URL:-}
       CONTACT_FROM_EMAIL: ${CONTACT_FROM_EMAIL:-TechRuby <contact@techruby.ir>}
     networks:
-      - rubytech_default
+      - techruby_default
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.techruby.rule=Host(`techruby.ir`)"
@@ -23,5 +23,5 @@ services:
       - "traefik.http.services.techruby.loadbalancer.server.port=3000"
 
 networks:
-  rubytech_default:
+  techruby_default:
     external: true

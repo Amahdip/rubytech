@@ -5,7 +5,7 @@ set -euo pipefail
 # Usage: ./scripts/ship-image.sh
 
 SSH_HOST="${SSH_HOST:-survey-salamruby}"
-REMOTE_DIR="${REMOTE_DIR:-/home/ubuntu/rubytech}"
+REMOTE_DIR="${REMOTE_DIR:-/home/ubuntu/techruby}"
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 IMAGE="${IMAGE:-techruby-web:latest}"
 

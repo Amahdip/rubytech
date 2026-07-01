@@ -6,7 +6,7 @@ set -euo pipefail
 # Requires: git push access, SSH alias `survey-salamruby` configured.
 
 SSH_HOST="${SSH_HOST:-survey-salamruby}"
-REMOTE_DIR="${REMOTE_DIR:-/home/ubuntu/rubytech}"
+REMOTE_DIR="${REMOTE_DIR:-/home/ubuntu/techruby}"
 BRANCH="${BRANCH:-main}"
 
 log() { echo "[deploy] $*"; }
